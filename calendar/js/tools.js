@@ -1,20 +1,5 @@
 var tools = (function () {
     var toolsObj = {
-        // 渲染弹出框
-        renderPopup: function (festival, obj, str) {
-            var title = obj.querySelector('.title')
-            var date = obj.querySelector('.date')
-            // var lunar = obj.querySelector('.lunar')
-
-            var dateFormat = tools.strFormatDate(str)
-            // var lunarObj = ChineseCalendar.date2lunar(dateFormat);
-
-            console.log(dateFormat)
-
-            title.innerHTML = festival.innerHTML
-            date.innerHTML = dateFormat.getFullYear() + '年' + (dateFormat.getMonth() + 1) + '月' + dateFormat.getDate() + '日'
-            // lunar.innerHTML = lunarObj.lunarMonthChiness + lunarObj.lunarDayChiness + '  ·  ' + lunarObj.gzY + '年' + lunarObj.gzM + '月' + lunarObj.gzD + '日'
-        },
 
         // 侧边栏及全年月份数据返回
         renderDay: function (year, n) {
@@ -52,18 +37,19 @@ var tools = (function () {
             var month = date.getMonth()
 
             for (var i = 0; i < 42; i++) {
+                var events = getEvent.curEvent(date)
                 if (month !== recivedMonth) {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            event: event.getEvent(date),
+                            event: events,
                             state: 'weekend',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            event: event.getEvent(date),
+                            event: events,
                             state: '',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -72,14 +58,14 @@ var tools = (function () {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            // event: event.getEvent(date),
+                            event: events,
                             state: 'weekend cur-day',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            // event: event.getEvent(date),
+                            event: events,
                             state: 'cur-day',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -88,14 +74,14 @@ var tools = (function () {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            // event: event.getEvent(date),
+                            event: events,
                             state: 'weekend cur-month',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            // event: event.getEvent(date),
+                            event: events,
                             state: 'cur-month',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -107,10 +93,12 @@ var tools = (function () {
             }
 
             for (var j = 0; j < array.length; j++) {
+                var festival_state = array[j].event ? 'event show' : 'event'
                 _html += `<li data-time="${array[j].dateStr}" class="${array[j].state}">
                     <p class="info">
                       <span class="date"><em>${array[j].day}</em></span>
                     </p>
+                    <p class="${festival_state}">${array[j].event}</p>
                   </li>`
             }
 
@@ -134,15 +122,6 @@ var tools = (function () {
                 oldTime.getMonth() === nowTime.getMonth() &&
                 oldTime.getDate() === nowTime.getDate()
         },
-
-        // 格式化日期 (如果这里传入的是字符串，那么得到的值不会按照下标去算)
-        strFormatDate: function (str) {
-            var date = new Date(parseInt(str.substr(0, 4)), parseInt(str.substr(4, 2)), parseInt(str.substr(6)))
-
-            console.log(str)
-
-            return date
-        }
     }
 
     return toolsObj

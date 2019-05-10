@@ -13,7 +13,6 @@
     var simpleMonth_title = simpleMonth_area.querySelector('.date')
     var fullMonth_area = calendar.querySelector('#renderFullYear')
     var fullMonth_title = fullMonth_area.querySelector('h2')
-    // var fullMonth_lunar = fullMonth_area.querySelector('.lunar-year')
     var detailMonth = calendar.querySelector('#renderMonth')
     var detailMonth_title = detailMonth.querySelector('.title')
     var detailMonth_day = detailMonth.querySelector('.day')
@@ -22,7 +21,6 @@
     var today = new Date()
     var year = today.getFullYear()
     var month = today.getMonth()
-    var calendarObj = event
 
     renderTab()
     initalToday()
@@ -53,7 +51,6 @@
     function initalToday() {
         simpleMonth_title.innerHTML = year + '年' + (month + 1) + '月'
         fullMonth_title.innerHTML = year + '年'
-        // fullMonth_lunar.innerHTML = '<i></i>' + calendarObj.year2GanZhe(year) + calendarObj.getAnimal(year) + '年'
         detailMonth_title.innerHTML = year + '年' + (month + 1) + '月'
 
         renderFullMonth()
@@ -96,12 +93,8 @@
         var control_today = control.querySelector('.today')
         var control_btnNext = control.querySelector('.btn-next')
         var sidebar_date = simpleMonth_area.querySelectorAll('.day li')
-        // var detail_festival = detailMonth_day.querySelectorAll('.show')
-        // var popup = calendar.querySelector('#popup')
-        var container = calendar.querySelector('.container')
 
         var dataTime = null
-        // var popupPos = {lx: 0, lr: 0, y: 0, w: detail_festival[0].offsetWidth, h: detail_festival[0].offsetHeight}
 
         sidebar_prevBtn.onclick = function () {
             if (month == 0) {
@@ -170,34 +163,5 @@
                 initalToday()
             }
         }
-
-        // for (var i = 0; i < detail_festival.length; i++) {
-        //     detail_festival[i].onclick = function (ev) {
-        //         var dateStr = this.parentNode.dataset.time
-        //
-        //         popupPos.lx = this.offsetLeft + popupPos.w + 20
-        //         popupPos.lr = this.offsetLeft - 280
-        //         popupPos.y = this.offsetTop - 52 + popupPos.h / 2
-        //
-        //         popup.style.display = 'block'
-        //         popup.style.top = popupPos.y + 'px'
-        //
-        //         if (container.offsetWidth - this.offsetLeft - this.offsetWidth >= popup.offsetWidth) {
-        //             popup.style.left = popupPos.lx + 'px'
-        //             popup.className = 'popup-left'
-        //         } else {
-        //             popup.style.left = popupPos.lr + 'px'
-        //             popup.className = 'popup-right'
-        //         }
-        //
-        //         tools.renderPopup(this, popup, dateStr)
-        //
-        //         ev.stopPropagation()
-        //     }
-        // }
-
-        // document.onclick = function () {
-        //     popup.style.display = 'none'
-        // }
     }
 })(window)
