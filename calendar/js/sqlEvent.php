@@ -26,8 +26,8 @@ $tmp = array();
 while ($events = $statement->fetch(PDO::FETCH_ASSOC)) {
     array_push($tmp, $events);
 }
-$allEvents = json_encode($tmp);
+$tmp = json_encode($tmp);
 
-//echo "<script type='text/javascript'>
-//var allEvents = $allEvents
-//</script>";
+//echo "<script src='getEvent.js' type='javascript'>
+//echo "<div id='allEvents'>$allEvents</div>"
+echo "var allEvents = $tmp";

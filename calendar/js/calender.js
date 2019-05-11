@@ -17,6 +17,7 @@
     var detailMonth_title = detailMonth.querySelector('.title')
     var detailMonth_day = detailMonth.querySelector('.day')
 
+    var monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     var tab_num = 0 // tab切换记录值
     var today = new Date()
     var year = today.getFullYear()
@@ -49,9 +50,9 @@
 
     // 初始化渲染日期
     function initalToday() {
-        simpleMonth_title.innerHTML = year + '年' + (month + 1) + '月'
-        fullMonth_title.innerHTML = year + '年'
-        detailMonth_title.innerHTML = year + '年' + (month + 1) + '月'
+        simpleMonth_title.innerHTML = monthArr[month + 1] + ' ' + year
+        fullMonth_title.innerHTML = year
+        detailMonth_title.innerHTML = monthArr[month + 1] + ' ' + year
 
         renderFullMonth()
         tools.renderDetailMonth(detailMonth_day, year, month)
@@ -63,20 +64,19 @@
         var sidebar_day = simpleMonth_area.querySelector('.day')
         var fullYear_month = fullMonth_area.querySelector('.month')
         var fullMonth_hmtl = ``
-        var monthArr = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octorber', 'November', 'December']
 
         for (var i = 0; i < 12; i++) {
             fullMonth_hmtl += `<li class="item">
                           <div class="title">${monthArr[i]}</div>
-                          <ul class="week">
-                            <li>日</li>
-                            <li>一</li>
-                            <li>二</li>
-                            <li>三</li>
-                            <li>四</li>
-                            <li>五</li>
-                            <li>六</li>
-                          </ul>
+            <ul class="week">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Thu</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+            </ul>
                           <ul class="day">${tools.renderDay(year, i)}</ul>
                         </li>`
         }

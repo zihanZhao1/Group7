@@ -1,23 +1,36 @@
 var getEvent = {
-    includes:'sqlEvent.php',
 
-    curEvent : function (date) {
+    curEvent: function (date) {
+        var year = date.getFullYear().toString()
+        var month = (date.getMonth()+1).toString()
+        var day = date.getDate().toString()
+        var titles = "";
 
-        var year = date.getFullYear();
-        var month = date.getMonth();
-        var day = date.getDate();
-        var dateRec = year+'-'+month+'-'+day
-        var tmp = null;
-        // var allEvents =
-        // alert(allEvents)
-        // for (e in allEvents) {
-        //     alert(e.start)
-        //     year == e.start.getFullYear()&&month == e.start.getMonth()&&day == e.start.getDate()
-        //     if () {
-        //         tmp = tmp+e.title+"&";
-        //     }
-        // }
+        if (date.getMonth() < 10) {
+            month = "0" + month
+        }
+        if (date.getDate() < 10) {
+            day = "0" + day
+        }
+        var strdate = year + "-" + month + "-" + day
 
-        return tmp;
+        var tmp = Array();
+        // alert(strdate+" "+allEvents.length)
+
+        for (var i = 0; i < allEvents.length; i++) {
+            // alert(allEvents[i].start.split(" ")[0]+strdate)
+            // alert(allEvents[i].title)
+            var eventDate = allEvents[i].start.split(" ")[0]
+            // alert(eventDate)
+            if (strdate == eventDate) {
+                tmp.push(allEvents[i])
+                titles = titles+allEvents[i].title+"</br>"
+                // alert(allEvents[i].start)
+            }
+        }
+        if (tmp) {
+            return titles;
+        }
+        return false;
     }
 }

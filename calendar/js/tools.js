@@ -37,19 +37,18 @@ var tools = (function () {
             var month = date.getMonth()
 
             for (var i = 0; i < 42; i++) {
-                var events = getEvent.curEvent(date)
                 if (month !== recivedMonth) {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: 'weekend',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: '',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -58,14 +57,14 @@ var tools = (function () {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: 'weekend cur-day',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: 'cur-day',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -74,14 +73,14 @@ var tools = (function () {
                     if (date.getDay() === 0 || date.getDay() === 6) {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: 'weekend cur-month',
                             dateStr: tools.returnDateStr(date)
                         })
                     } else {
                         array.push({
                             day: date.getDate(),
-                            event: events,
+                            event: getEvent.curEvent(date),
                             state: 'cur-month',
                             dateStr: tools.returnDateStr(date)
                         })
@@ -93,12 +92,13 @@ var tools = (function () {
             }
 
             for (var j = 0; j < array.length; j++) {
-                var festival_state = array[j].event ? 'event show' : 'event'
+                var event_state = array[j].event ? 'event show' : 'event'
+
                 _html += `<li data-time="${array[j].dateStr}" class="${array[j].state}">
                     <p class="info">
                       <span class="date"><em>${array[j].day}</em></span>
                     </p>
-                    <p class="${festival_state}">${array[j].event}</p>
+                    <p class="${event_state}">${array[j].event}</p>
                   </li>`
             }
 
