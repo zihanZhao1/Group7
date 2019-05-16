@@ -1,0 +1,147 @@
+<?php
+$msg="";
+require"conn.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
+$msg = "";
+  if (isset($_POST['cancel'])){
+        header("location:...");
+  }
+
+  if (isset($_POST['submit']))
+  {
+      //collect the data with $_POST
+      $name=$_POST["name"];
+      $email=$_POST["email"];
+      $password=$_POST["password"];
+      $password1=$_POST["password1"];
+      $telNumber=$_POST["telNumber"];
+
+        if ($name == ""|| $email == ""|| $password != $password1)
+            $msg="please check your inputs!";
+            else{
+              $sql = $conn->query("SELECT U_ID FROM SEI_User WHERE email='$email'");
+              $num_rows=$sql->rowCount();
+              //var_dump($num_rows);
+              if($num_rows>0){
+                $msg="Email already exists in the database!";
+              }else{
+                $token='sdlfdkfhgDSJKFAHUS123987!@';
+	              $token=str_shuffle($token);
+	              $token=substr($token,0,10);
+
+                $hashedPassword=password_hash($password,PASSWORD_BCRYPT);
+
+                $sql="INSERT INTO SEI_User (name,email,password,isEmailConfirmed,token,tel) VALUES(:name,:message,:hashedPassword,'0',:token,:telNumber)";
+                $query=$conn->prepare($sql);
+                $query->execute(array(
+                  ':name' => $name,
+                  ':message'=> $email,
+                  ':hashedPassword'=> $hashedPassword,
+                  ':token'=>$token,
+                  ':telNumber'=>$telNumber
+                ));
+
+                include_once "phpmailer/phpmailer.php";
+
+                $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                try {
+                    //Server settings
+                    //这段可以删除
+
+                    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = 'chenchang1995.96@gmail.com';                 // SMTP username
+                    $mail->Password = '19950906';                           // SMTP password
+                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 587;                                    // TCP port to connect to
+
+                    //Recipients
+                    $mail->setFrom('chenchang1995.96@gmail.com', 'Sport Team');
+                    $mail->addAddress($email, $name);   // Add a recipient
+
+                    //Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Please verify email!';
+                    $mail->Body    = "
+                          Please click on the link below:<br><br>
+
+                          <a href='http://localhost/Facility/confirm.php?email=$email&token=$token'>Click here</a>";
+                    if($mail->send())
+                      $msg="You have been registered! Please verify your email!";
+                    else
+                      $msg="Erro!Please try again!";
+
+                } catch (Exception $e) {
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                }
+
+
+          }
+        }
+      }
+      ?>
+
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container" style="margin-top:100px;">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-md-offset-3" align="center">
+        <img src="logo.png"><br><br>
+
+        <?php if ($msg != "") echo $msg . "<br><br>" ?>
+
+<!--  Sign Up form-->
+  <form action="register.php"  method="post">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+          <p align="left"><font color="red">*</font>
+          <input class="form-control"  type="text" placeholder="Enter Name" name="name" required>
+
+
+          <p align="left"><font color="red">*</font>
+          <td><input  class="form-control" type="email" placeholder="Enter Email" name="email" required>
+
+
+          <font color="red">*</font>
+          <input  class="form-control" type="number" placeholder="Enter Contact Number" name="telNumber" required>
+
+          <p align="left"><font color="red">*</font>
+          <input  class="form-control" type="password" placeholder="Enter Password" name="password" required>
+
+          <p align="left"><font color="red">*</font>
+          <input  class="form-control" type="password" placeholder="Repeat Password" name="password1" required>
+
+      <br>
+      <br>
+
+        <button type="submit" class="btn btn-primary" name="submit" >Register</button><br><br>
+        <button type="button" class="btn btn-primary" name="cancel" >Cancel</button>
+
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p></td>
+
+      <p>
+		      Already a member? <a href="login.php">Sign in</a>
+	    </p>
+    </form>
+
+  </div>
+ </div>
+</div>
+
+</body>
+</html>
