@@ -11,6 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>Our Facilities - Durham University</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
@@ -21,7 +22,9 @@
     <link rel="stylesheet" href="css/fullcalendar.css">
     <link rel="stylesheet" href="css/fullcalendar.print.css" media='print'>
 
+    <!--<meta http-equiv="refresh" content="5">-->
 </head>
+
 <body class="home">
 <!--  -->
 <div class="container-fluid">
@@ -45,7 +48,7 @@
     <div id="navigation" class="row-fluid">
         <div class="span12">
             <ul class="nav nav-pills">
-                <li><a href="index.html">Facilities</a></li>
+                <li><a href="index.php">Facilities</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="course.html">Courses</a></li>
                 <li><a href="calendar.html">Calendar</a></li>
@@ -54,11 +57,15 @@
             </ul>
         </div>
     </div>
-    <div id="content" class="row-fluid" style="height: auto">
-        <div class="span3 main">
+
+    <div id="content" class="row-fluid">
+        <div class="span3 pages">
             <ul>
-                <li class='navcurrent'><a href="#6"> My Details</strong></a></li>
-                <li class='sideways'><a href="#7">My bookings</a></li>
+                <li class='navcurrent'><h3> Our Facilities</h3></li>
+                <li class='sideways'><a href="/events/">Events</a></li>
+                <li class='sideways'><a href="/facilities/durham/">Maiden Castle</a></li>
+                <li class='sideways'><a href="/queenscampus/">Queen's Campus</a></li>
+                <li class='sideways'><a href="/about/facilities/durham/contactus/">Contact Us</a></li>
             </ul>
         </div>
 
@@ -69,7 +76,7 @@
                         <div class="span12">
                             <div class="box">
                                 <div class="box-head">
-                                    <h3>Calendar</h3>
+                                    <h2>Calendar</h2>
                                 </div>
                                 <div class="box-content box-nomargin">
                                     <div class="calendar"></div>
@@ -79,22 +86,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-        <!--<div class="span2 feature">-->
-            <!--<ul>-->
-                <!--<li class='navcurrent'><a href="#6"> My Details</strong></a></li>-->
-                <!--<li class='sideways'><a href="#7">My bookings</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
     </div>
-
 </div>
+
 <div class="container-fluid no-border">
     <div id="footer" class="row-fluid">
         <div class="span12">
-
             <script type="text/javascript">
                 var _gaq = _gaq || [];
                 if (typeof MAP_ON_PAGE !== 'undefined' && MAP_ON_PAGE) {
@@ -125,7 +123,7 @@
 </div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/fullcalendar.min.js"></script>
-<script src="php/conn.php"></script>
+<script src="php/conn_calendar.php"></script>
 <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
