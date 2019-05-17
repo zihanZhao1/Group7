@@ -163,29 +163,48 @@ CREATE TABLE IF NOT EXISTS `sei_news` (
 --
 
 DROP TABLE IF EXISTS `sei_user`;
-CREATE TABLE IF NOT EXISTS `sei_user` (
-  `U_ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SEI_User` (
+  `U_ID` int(11) NOT NULL,
   `name` text COLLATE utf8_bin NOT NULL,
-  `Email` text COLLATE utf8_bin NOT NULL,
+  `email` text COLLATE utf8_bin NOT NULL,
   `password` text COLLATE utf8_bin NOT NULL,
+  `isEmailConfirmed` tinyint(4) NOT NULL,
+  `token` varchar(10) COLLATE utf8_bin NOT NULL,
+  `tokenExpire` datetime NOT NULL,
   `tel` text COLLATE utf8_bin NOT NULL,
-  `role` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`U_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=102343 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `role` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- 转存表中的数据 `sei_user`
+-- 转存表中的数据 `SEI_User`
 --
 
-INSERT INTO `sei_user` (`U_ID`, `name`, `Email`, `password`, `tel`, `role`) VALUES
-(101, 'fifi', '123@qq.com', 'qwaszx', '123', 'student'),
-(102, 'jie', '123@qq.com', 'qwaszx', '123', 'student'),
-(103, 'tom', '123@qq.com', 'qwaszx', '123', 'student'),
-(102342, 'tihu', '123@qq.com', 'qwaszx', '123', 'student');
+INSERT INTO `SEI_User` (`U_ID`, `name`, `email`, `password`, `isEmailConfirmed`, `token`, `tokenExpire`, `tel`, `role`) VALUES
+(9, 'xiaowei cheng', 'chang.chen@durham.ac.uk', '$2y$10$2WF9MQwiTYQXX1FVAW16YOPMYDikGFKCpU.xMDbmN3QbyLDMM8w2O', 0, '8DlUK@7h3H', '0000-00-00 00:00:00', '1616914985', ''),
+(13, 'emma', '873467017@qq.com', '$2y$10$Ae9wV.9PsT4dvt1vD7BnL.eqnxTbiVCF4ye45UWMcqLopuVVlVdVm', 1, '', '2019-05-14 00:23:22', '7482377563', '');
 
 --
--- 限制导出的表
+-- 转储表的索引
 --
+
+--
+-- 表的索引 `SEI_User`
+--
+ALTER TABLE `SEI_User`
+  ADD PRIMARY KEY (`U_ID`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
+--
+
+--
+-- 使用表AUTO_INCREMENT `SEI_User`
+--
+ALTER TABLE `SEI_User`
+  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+COMMIT;
+
+
 
 --
 -- 限制表 `sei_booking`
