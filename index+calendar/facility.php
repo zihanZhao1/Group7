@@ -9,7 +9,7 @@
 class facility
 {
 
-    function facility($name, $contact, $cap, $url)
+    function facility($ID,$name, $contact, $url)
     {
 
         echo " <div class=\"row-fluid\">
@@ -21,9 +21,8 @@ class facility
                    </div>
                    <div class=\"span6 \">
                             <div class=\"box-heading\">
-                            <p>capability:$cap</p>
                             <p>contact:$contact</p>
-                            <h3><a href=\"booking.php?id = $name\">Book now</a></h3></div>
+                            <h3><a href=\"booking.php?id=$ID\">Book now</a></h3></div>
            <br/>
  </div>
                </div>";

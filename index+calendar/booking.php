@@ -1,35 +1,72 @@
 <?php
-include("php/connection.php");
+include("php/conn.php");
+session_start();
 ?>
 <!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Our Facilities - Durham University</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="css/team-durham.css" type="text/css">
     <link rel="stylesheet" href="css/index.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    <link rel="stylesheet" href="css/fullcalendar.print.css" media='print'>
     <script src="js/jquery.min.js"></script>
     <script>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
     </script>
+    <script>
+        $(document).ready(function () {
+            //ready is once all the HTML has loaded
+            $(".date_form").on('submit', function (e) {
+                e.preventDefault();
+                var param = $(".date_form").serialize();
+                console.log(param);
+                $.ajax({
+                    url: 'php/conn_calendar_available.php',
+                    data: param,
+                    method: 'post',
+                    success: function (date) {
+                        // data;
+                        $('.date_form').html(date)
+                        $('.calendar').html("");
+                        var allActivity = date
+                        for (var i = 0; i < allActivity.length; i++) {
+                            allActivity[i].allDay = false
+                        }
+                        if ($('.calendar').length > 0) {
+                            $('.calendar').fullCalendar({
+                                header: {
+                                    left: 'prev,next,today',
+                                    center: 'title',
+                                    right: 'agendaDay'
+                                },
+                                buttonText: {
+                                    today: 'Today'
+                                },
+                                allDaySlot:false,
+                                minTime:7,
+                                maxTime:23,
+                                editable: false,
+                                events: allActivity,
+                                defaultView: 'Day',
+                            });
+                        }
+                    },
+                    fail: function fail() {
+                        alert("Failed");
+                    },
+                });
+            });
+        })
+    </script>
 </head>
-
 <body class="home">
-<!--  -->
 <div class="container-fluid">
     <div id="header" class="row-fluid">
         <div class="span12">
@@ -51,76 +88,78 @@ include("php/connection.php");
     <div id="navigation" class="row-fluid">
         <div class="span12">
             <ul class="nav nav-pills">
-                <li><a href="index.php">Facilities</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="course.html">Courses</a></li>
-                <li><a href="calendar.html">Calendar</a></li>
-                <li><a href="Booking.html">Booking</a></li>
-                <li><a href="help.html">Help</a></li>
+                <li><a href="#0">Home</a></li>
+                <li><a href="#1">Facilities</a></li>
+                <li><a href="#2">Courses</a></li>
+                <li><a href="#3">Calendar</a></li>
+                <li><a href="#4">Help</a></li>
+                <li><a href="#5">About Us</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="container">
-        <div class="first-box">
-            <p>Booking Now</p>
-            <form name="f" method="post">
-                <label>Email: </label>
-                <input type="email" name="email" style="margin-left: 20px;"><br>
-                <label>Facility: </label>
-                <?php
-                $result = $conn->query("select F_ID, name from sei_facility");
+    <div id="content" class="row-fluid">
+        <div class="span4 pages">
+            <div style="margin-left: 20px">
+                <form class="date_form" name="f">
+                    <h4>Date: </h4>
+                    <input type="date" name="date" id="date"><br>
+                    <input class="btn btn-primary" type="submit" name="submit" value="View">
+                </form>
 
-                echo " <select name='facility' style='margin-left: 20px;'>";
+                <form name="f" method="post">
+                    <?php
+                    //                if($_SESSION==null){
+                    //                    header("location:login.php");
+                    //                }
+                    //                echo $_SESSION['name'];
+                    if ($_GET["id"] == null) {
+                        header("location: index.php");
+                    }
+                    $Fid = $_GET["id"];
+                    $_SESSION['facility'] = $Fid;
+                    $sql = "select * from SEI_Facility where F_ID = $Fid;";
+                    $statement = $pdo->query($sql);
+                    $f = $statement->fetch(PDO::FETCH_ASSOC);
+                    $fname = $f['name'];
+                    echo "<h3>Booking $fname</h3>";
+                    ?>
 
-                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    unset($id, $name);
-                    $id = $row['F_ID'];
-                    $name = $row['name'];
-                    echo '<option style="display:none;"></option>';
-                    echo '<option value="' . $id . '">' . $id . ',' . $name . '</option>';
-                }
-                echo "</select>";
-                ?><br>
-                <label>Date: </label>
-                <input type="date" name="date" id="cdate" style="margin-left: 20px;"><br>
-                <label>Start Time: </label>
-                <select name="stime" style="margin-left: 20px;">
-                    <option selected="selected" style='display: none' value=''></option>
-                    <option>09:00:00</option>
-                    <option>10:00:00</option>
-                    <option>11:00:00</option>
-                    <option>12:00:00</option>
-                    <option>13:00:00</option>
-                    <option>14:00:00</option>
-                    <option>15:00:00</option>
-                    <option>16:00:00</option>
-                    <option>17:00:00</option>
-                    <option>18:00:00</option>
-                    <option>19:00:00</option>
-                    <option>20:00:00</option>
-                </select><br>
-                <label>End Time:</label>
-                <select name="etime" style="margin-left: 20px;">
-                    <option selected="selected" style='display: none' value=''></option>
-                    <option>10:00:00</option>
-                    <option>11:00:00</option>
-                    <option>12:00:00</option>
-                    <option>13:00:00</option>
-                    <option>14:00:00</option>
-                    <option>15:00:00</option>
-                    <option>16:00:00</option>
-                    <option>17:00:00</option>
-                    <option>18:00:00</option>
-                    <option>19:00:00</option>
-                    <option>20:00:00</option>
-                    <option>21:00:00</option>
-                </select><br>
-                <input type="submit" name="submit" value="Confirm" onclick="return validateForm();"
-                       class="btn btn-primary" style="margin-left: 20px;"><br>
-                <p1 style='margin-left: 20px;'>Please make sure the number of players is lower than capacity.</p1>
-                <?php include("php/bookingserver.php") ?>
-            </form>
+                    <h4>Start Time: </h4>
+                    <input type="time" id="stime" name="stime">
+
+                    <h4>End Time:</h4>
+                    <input type="time" id="etime" name="etime"><br>
+
+                    <h4>Place for:(how many people)</h4>
+                    <input type="number" id="num" name="num"><br>
+
+                    <input type="submit" name="submit" value="Confirm" onclick="return validateForm();"
+                           class="btn btn-primary"><br>
+
+                    <p1 style='margin-left: 20px;'>* Please make sure the number of players is lower than capacity.</p1>
+                    <?php include("php/bookingserver.php") ?>
+                </form>
+            </div>
+        </div>
+
+        <div class="span8 extra">
+            <div class="container" style="width: auto; height: auto">
+                <div class="content">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="box">
+                                <div class="box-head">
+                                    <h2>Calendar</h2>
+                                </div>
+                                <div class="box-content box-nomargin">
+                                    <div class="calendar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -155,24 +194,72 @@ include("php/connection.php");
 
         $(function () {
             var date_now = new Date();
-
             var year = date_now.getFullYear();
-
             var month = date_now.getMonth() + 1 < 10 ? "0" + (date_now.getMonth() + 1) : (date_now.getMonth() + 1);
-
             var date = date_now.getDate() < 10 ? "0" + date_now.getDate() : date_now.getDate();
-
             $("#cdate").attr("min", year + "-" + month + "-" + date);
         })
 
+        $(document).ready(function () {
+            $("#etime").change(function () {
+                var startTime = document.getElementById("stime").value;
+                var endTime = document.getElementById("etime").value;
+                var startDate = new Date('1970-01-01T' + startTime + 'Z');
+                var endDate = new Date('1970-01-01T' + endTime + 'Z');
+
+                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                    alert("End time should be greater than Start time");
+                    document.getElementById("etime").value = "";
+                }
+            });
+        });
     </script>
 </div>
+
 <div class="container-fluid no-border">
     <div id="footer" class="row-fluid">
         <div class="span12">
+            <ul class="nav nav-pills">
+                <li><a href='https://www.dur.ac.uk/contactform2/?pageid=59579'>Comments &amp; Questions</a></li>
+                <li><a href='https://www.dur.ac.uk/about/terms/'>Disclaimer</a></li>
+                <li><a href='https://www.dur.ac.uk/about/trading_name/'>Trading Name</a></li>
+                <li><a href="https://www.dur.ac.uk/about/cookies/">Cookie usage policy</a></li>
+                <li><a href="https://www.dur.ac.uk/ig/dp/privacy/">Privacy Notices</a></li>
+                <li class="status">Team Durham is part of Durham University. &nbsp; Updated: 10th May 2019</li>
+            </ul>
 
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                if (typeof MAP_ON_PAGE !== 'undefined' && MAP_ON_PAGE) {
+                    document.write('<' + 'script src="//maps.google.com/maps/api/js?sensor=false"' + ' type="text/javascript"><' + '/script>');
+                }
+            </script>
+
+<!--            <script type="text/javascript" src="//www.dur.ac.uk/js/scripts.min.js"></script>-->
+            <noscript>
+                <iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9Q3S4"
+                        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+            <script>(function (w, d, s, l, i) {
+                    w[l] = w[l] || [];
+                    w[l].push({
+                        'gtm.start':
+                            new Date().getTime(), event: 'gtm.js'
+                    });
+                    var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                    j.async = true;
+                    j.src =
+                        '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                    f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-W9Q3S4');</script>
         </div>
     </div>
 </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/fullcalendar.min.js"></script>
+<script src="php/conn_calendar_available.php"></script>
+<script type="text/javascript" src="js/calendar_mwd.js"></script>
 </body>
 </html>
