@@ -8,25 +8,25 @@
 
 include 'conn.php';
 
-$sql = "select * from SEI_Booking;";
+$sql = "select * from sei_booking;";
 $statement = $pdo->query($sql);
 
 $tmpBooking = array();
 $tmpAct = array();
 while ($booking = $statement->fetch(PDO::FETCH_ASSOC)) {
-    $ID = $booking['EC_ID'];
-    if($booking['className']=='course'){
-        $statementCourse = $pdo->query("select * from SEI_Course where C_ID = $ID");
+    $E_ID = $booking['E_ID'];
+    $C_ID = $booking['C_ID'];
+    if($E_ID==null){
+        $statementCourse = $pdo->query("select * from sei_course where C_ID = $C_ID");
         $course = $statementCourse->fetch(PDO::FETCH_ASSOC);
-        $booking['title'] = $course['title'];
+        $booking['title'] = "Course ".$C_ID;
         array_push($tmpAct, $booking);
         continue;
     }
-    elseif ($booking['className'] == 'event'){
-        $statementEvent = $pdo->query("select * from SEI_Event where E_ID = $ID");
+    elseif ($C_ID==null){
+        $statementEvent = $pdo->query("select * from sei_event where E_ID = $E_ID");
         $event = $statementEvent->fetch(PDO::FETCH_ASSOC);
-        $booking['title']=$event['title'];
-        $booking['url']=$event['url'];
+        $booking['title']="Event ".$E_ID;
         array_push($tmpAct, $booking);
         continue;
     }
