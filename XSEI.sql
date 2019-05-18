@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `sei_course`;
 CREATE TABLE IF NOT EXISTS `sei_course` (
   `C_ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` text COLLATE utf8_bin NOT NULL,
-  `time` text COLLATE utf8_bin NOT NULL,
+  `times` text COLLATE utf8_bin NOT NULL,
   `weeks` int(11) NOT NULL,
   `start` date NOT NULL,
   PRIMARY KEY (`C_ID`)
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `sei_event` (
   `title` text COLLATE utf8_bin NOT NULL,
   `url` text COLLATE utf8_bin NOT NULL,
   `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
   `scale` int(11) NOT NULL,
   PRIMARY KEY (`E_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4234 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
