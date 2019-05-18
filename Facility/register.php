@@ -49,9 +49,9 @@ $msg = "";
                 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
                 try {
                     //Server settings
-                    //这段可以删除
 
-                    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+
+                    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
                     $mail->isSMTP();                                      // Set mailer to use SMTP
                     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -111,7 +111,7 @@ $msg = "";
 
           <p align="left"><font color="red">*</font>
           <input class="form-control"  type="text" placeholder="Enter Name" name="name" required>
-
+        </p>
 
           <p align="left"><font color="red">*</font>
           <td><input  class="form-control" type="email" placeholder="Enter Email" name="email" required>
@@ -129,8 +129,8 @@ $msg = "";
       <br>
       <br>
 
-        <button type="submit" class="btn btn-primary" name="submit" >Register</button><br><br>
-        <button type="button" class="btn btn-primary" name="cancel" >Cancel</button>
+        <button type="submit" class="btn btn-primary" name="submit" style="background-color: indigo; border:0px;">Register</button>
+        <button type="button" class="btn btn-primary" name="cancel" style="background-color: indigo; border:0px;" >Cancel</button>
 
         <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p></td>
 

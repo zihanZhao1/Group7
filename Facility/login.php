@@ -1,4 +1,6 @@
 <?php
+  session_start();
+
   $msg="";
   require"conn.php";
   if (isset($_POST['submit']))
@@ -10,7 +12,7 @@
         if ($email == ""|| $password == "")
             $msg="please enter your inputs!";
             else{
-              $sql = $conn->query("SELECT U_ID, password,isEmailConfirmed FROM SEI_User WHERE email='$email'");
+              $sql = $conn->query("SELECT U_ID, password,isEmailConfirmed,role FROM SEI_User WHERE email='$email'");
               $num_rows=$sql->rowCount();
               //var_dump($num_rows);
               if($num_rows>0){
@@ -18,9 +20,18 @@
                 if(password_verify($password, $data['password'])){
                   if($data['isEmailConfirmed']==0)
                     $msg="Please verify your email!";
-                    else{
+                  else{
+                      $_SESSION["userName"]=$email;
+                      
+                      if($data['role']=="admin")
+                      header(logo.php);
+                      //admin 登陸頁面
+                      else{
                       $msg="You have been logged in";
-                      //这段要改成login之后的页面
+
+                      header();
+                        //user 登陸頁面
+                      }
                     }
                 }else
                   $msg="Please check your password!";
