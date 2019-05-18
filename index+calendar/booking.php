@@ -15,6 +15,7 @@ session_start();
     <link rel="stylesheet" href="css/fullcalendar.css">
     <link rel="stylesheet" href="css/fullcalendar.print.css" media='print'>
     <script src="js/jquery.min.js"></script>
+
     <script>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
@@ -23,43 +24,55 @@ session_start();
     <script>
         $(document).ready(function () {
             //ready is once all the HTML has loaded
+
             $(".date_form").on('submit', function (e) {
                 e.preventDefault();
-                var param = $(".date_form").serialize();
-                console.log(param);
+                var day = $(".date_form").serialize();
+                var url = 'php/conn_calen_avail.php';
                 $.ajax({
-                    url: 'php/conn_calendar_available.php',
-                    data: param,
-                    method: 'post',
-                    success: function (date) {
-                        // data;
-                        $('.date_form').html(date)
-                        $('.calendar').html("");
-                        var allActivity = date
-                        for (var i = 0; i < allActivity.length; i++) {
-                            allActivity[i].allDay = false
-                        }
-                        if ($('.calendar').length > 0) {
-                            $('.calendar').fullCalendar({
-                                header: {
-                                    left: 'prev,next,today',
-                                    center: 'title',
-                                    right: 'agendaDay'
-                                },
-                                buttonText: {
-                                    today: 'Today'
-                                },
-                                allDaySlot:false,
-                                minTime:7,
-                                maxTime:23,
-                                editable: false,
-                                events: allActivity,
-                                defaultView: 'Day',
-                            });
-                        }
+                    url: url,
+                    data: day,
+                    method: 'get',
+                    success: function (data) {
+                        $('.content').html(data);
+                        // $('.date_form').html(data);
+                        // $('.calendar').fullCalendar({
+                        //     header: {
+                        //         left: 'prev,next,today',
+                        //         // center: 'title',
+                        //         right: 'month,agendaWeek,agendaDay'
+                        //     },
+                        //     allDaySlot:false,
+                        //     minTime:7,
+                        //     maxTime:23,
+                        //     buttonText: {
+                        //         today: 'Today',
+                        //     },
+                        //     editable: false,
+                        //     events: data,
+                        //     defaultView: 'day',
+                        //     defaultDate:day,
+                        // });
                     },
                     fail: function fail() {
-                        alert("Failed");
+                        alert("Failed")
+                    },
+                });
+            });
+
+            $(".num_form").on('submit', function (e) {
+                e.preventDefault();
+                var num = $(".num_form").serialize();
+                var url = 'php/conn_calen_avail.php';
+                $.ajax({
+                    url: url,
+                    data: num,
+                    method: 'get',
+                    success: function (data) {
+                        $('.content').html(data);
+                    },
+                    fail: function fail() {
+                        alert("Failed")
                     },
                 });
             });
@@ -101,45 +114,37 @@ session_start();
     <div id="content" class="row-fluid">
         <div class="span4 pages">
             <div style="margin-left: 20px">
-                <form class="date_form" name="f">
+                <input class="btn btn-primary" type="button" value="View My Bookings" name="date"
+                       onclick="window.location.reload()">
+                <?php
+                //                if($_SESSION==null){
+                //                    header("location:login.php");
+                //                }
+                //                echo $_SESSION['name'];
+                //                    if ($_GET["id"] == null) {
+                //                        header("location: index.php");
+                //                    }
+                $Fid = $_GET["id"];
+                $_SESSION['facility'] = $Fid;
+                $sql = "select * from sei_facility where F_ID = $Fid;";
+                $statement = $pdo->query($sql);
+                $f = $statement->fetch(PDO::FETCH_ASSOC);
+                $fname = $f['name'];
+                echo "<h3>Booking $fname</h3>";
+                ?>
+                <form class="date_form">
                     <h4>Date: </h4>
                     <input type="date" name="date" id="date"><br>
-                    <input class="btn btn-primary" type="submit" name="submit" value="View">
+                    <input class="btn btn-primary" type="submit" value="View Valid Time" name="date">
                 </form>
 
-                <form name="f" method="post">
-                    <?php
-                    //                if($_SESSION==null){
-                    //                    header("location:login.php");
-                    //                }
-                    //                echo $_SESSION['name'];
-                    if ($_GET["id"] == null) {
-                        header("location: index.php");
-                    }
-                    $Fid = $_GET["id"];
-                    $_SESSION['facility'] = $Fid;
-                    $sql = "select * from SEI_Facility where F_ID = $Fid;";
-                    $statement = $pdo->query($sql);
-                    $f = $statement->fetch(PDO::FETCH_ASSOC);
-                    $fname = $f['name'];
-                    echo "<h3>Booking $fname</h3>";
-                    ?>
-
-                    <h4>Start Time: </h4>
-                    <input type="time" id="stime" name="stime">
-
-                    <h4>End Time:</h4>
-                    <input type="time" id="etime" name="etime"><br>
-
+                <form class="num_form" name="f">
                     <h4>Place for:(how many people)</h4>
                     <input type="number" id="num" name="num"><br>
-
-                    <input type="submit" name="submit" value="Confirm" onclick="return validateForm();"
-                           class="btn btn-primary"><br>
-
-                    <p1 style='margin-left: 20px;'>* Please make sure the number of players is lower than capacity.</p1>
-                    <?php include("php/bookingserver.php") ?>
+                    <input type="submit" name="submit" value="Confirm" class="btn btn-primary"><br>
                 </form>
+
+                <p1>* Please make sure the number of players is lower than capacity.</p1>
             </div>
         </div>
 
@@ -163,57 +168,57 @@ session_start();
         </div>
     </div>
 
-    <script>
-        function validateForm() {
-            var a = document.forms["f"]["email"].value;
-            var b = document.forms["f"]["facility"].value;
-            var c = document.forms["f"]["date"].value;
-            var d = document.forms["f"]["stime"].value;
-            var e = document.forms["f"]["etime"].value;
-
-            if (a == "") {
-                alert("Email must be filled out");
-                return false;
-            } else if (b == "") {
-                alert("You have to choose a facility");
-                return false;
-            } else if (c == "") {
-                alert("Date must be filled out");
-                return false;
-            } else if (d == "") {
-                alert("Start time must be filled out");
-                return false;
-            } else if (e == "") {
-                alert("End time must be filled out");
-                return false;
-            } else {
-                confirm("Succussfully booked!The email of details of your booking has been send to you.");
-                document.f.submit();
-            }
-        }
-
-        $(function () {
-            var date_now = new Date();
-            var year = date_now.getFullYear();
-            var month = date_now.getMonth() + 1 < 10 ? "0" + (date_now.getMonth() + 1) : (date_now.getMonth() + 1);
-            var date = date_now.getDate() < 10 ? "0" + date_now.getDate() : date_now.getDate();
-            $("#cdate").attr("min", year + "-" + month + "-" + date);
-        })
-
-        $(document).ready(function () {
-            $("#etime").change(function () {
-                var startTime = document.getElementById("stime").value;
-                var endTime = document.getElementById("etime").value;
-                var startDate = new Date('1970-01-01T' + startTime + 'Z');
-                var endDate = new Date('1970-01-01T' + endTime + 'Z');
-
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("End time should be greater than Start time");
-                    document.getElementById("etime").value = "";
-                }
-            });
-        });
-    </script>
+    <!--    <script>-->
+    <!--        function validateForm() {-->
+    <!--            var a = document.forms["f"]["email"].value;-->
+    <!--            var b = document.forms["f"]["facility"].value;-->
+    <!--            var c = document.forms["f"]["date"].value;-->
+    <!--            var d = document.forms["f"]["stime"].value;-->
+    <!--            var e = document.forms["f"]["etime"].value;-->
+    <!---->
+    <!--            if (a == "") {-->
+    <!--                alert("Email must be filled out");-->
+    <!--                return false;-->
+    <!--            } else if (b == "") {-->
+    <!--                alert("You have to choose a facility");-->
+    <!--                return false;-->
+    <!--            } else if (c == "") {-->
+    <!--                alert("Date must be filled out");-->
+    <!--                return false;-->
+    <!--            } else if (d == "") {-->
+    <!--                alert("Start time must be filled out");-->
+    <!--                return false;-->
+    <!--            } else if (e == "") {-->
+    <!--                alert("End time must be filled out");-->
+    <!--                return false;-->
+    <!--            } else {-->
+    <!--                confirm("Succussfully booked!The email of details of your booking has been send to you.");-->
+    <!--                document.f.submit();-->
+    <!--            }-->
+    <!--        }-->
+    <!---->
+    <!--        $(function () {-->
+    <!--            var date_now = new Date();-->
+    <!--            var year = date_now.getFullYear();-->
+    <!--            var month = date_now.getMonth() + 1 < 10 ? "0" + (date_now.getMonth() + 1) : (date_now.getMonth() + 1);-->
+    <!--            var date = date_now.getDate() < 10 ? "0" + date_now.getDate() : date_now.getDate();-->
+    <!--            $("#cdate").attr("min", year + "-" + month + "-" + date);-->
+    <!--        })-->
+    <!---->
+    <!--        $(document).ready(function () {-->
+    <!--            $("#etime").change(function () {-->
+    <!--                var startTime = document.getElementById("stime").value;-->
+    <!--                var endTime = document.getElementById("etime").value;-->
+    <!--                var startDate = new Date('1970-01-01T' + startTime + 'Z');-->
+    <!--                var endDate = new Date('1970-01-01T' + endTime + 'Z');-->
+    <!---->
+    <!--                if ((Date.parse(startDate) >= Date.parse(endDate))) {-->
+    <!--                    alert("End time should be greater than Start time");-->
+    <!--                    document.getElementById("etime").value = "";-->
+    <!--                }-->
+    <!--            });-->
+    <!--        });-->
+    <!--    </script>-->
 </div>
 
 <div class="container-fluid no-border">
@@ -235,7 +240,7 @@ session_start();
                 }
             </script>
 
-<!--            <script type="text/javascript" src="//www.dur.ac.uk/js/scripts.min.js"></script>-->
+            <!--            <script type="text/javascript" src="//www.dur.ac.uk/js/scripts.min.js"></script>-->
             <noscript>
                 <iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9Q3S4"
                         height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -256,10 +261,9 @@ session_start();
         </div>
     </div>
 </div>
-</div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/fullcalendar.min.js"></script>
-<script src="php/conn_calendar_available.php"></script>
+<script src="php/conn_calendar.php"></script>
 <script type="text/javascript" src="js/calendar_mwd.js"></script>
 </body>
 </html>

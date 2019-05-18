@@ -9,14 +9,14 @@
 class facility
 {
 
-    function facility($ID,$name, $contact, $url)
+    function facility($ID,$name, $contact)
     {
 
         echo " <div class=\"row-fluid\">
                   <div class=\"span6 \">
                   
                        <div class=\"box-heading\">
-                            <a href=\"$url\"><img src=\"img/$name.jpg\" title=\"\" alt=\"\"/></a>
+                            <img src=\"img/$name.jpg\" title=\"\" alt=\"\"/>
                         </div><br/>
                    </div>
                    <div class=\"span6 \">

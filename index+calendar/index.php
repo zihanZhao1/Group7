@@ -77,10 +77,10 @@ include 'facility.php'
                 <div id="content173370" class="contentblock contentblock-content-grid-display">
                     <div class="layout_boxed">
                         <?php
-                        $sql = "select * from SEI_Facility;";
+                        $sql = "select * from sei_facility;";
                         $statement = $pdo->query($sql);
                         while ($f = $statement->fetch(PDO::FETCH_ASSOC)) {
-                            $fac = new facility($f['F_ID'],$f['name'],$f['info'],$f['url']);
+                            $fac = new facility($f['F_ID'],$f['name'],$f['info']);
                         }
                         ?>
                     </div>
