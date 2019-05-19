@@ -1,7 +1,33 @@
 <?php
  include_once "../php/head.php";
 
+   $msg="";
+   require"conn.php";
 
+   if (isset($_POST['submit']))
+   {
+      $newName=$_POST["newName"];
+      $newPassword=$_POST["newPassword"];
+      $newContactNumber=$_POST["newContactNumber"];
+      $userName=$_SESSION['userName'];
+
+
+
+      if ($newName!="")
+        {  $sqlupdateText="UPDATE SEI_User SET name ='$newName'WHERE email='$userName'";
+          $sql=$conn->query($sqlupdateText);}
+
+      if($newPassword!=""){
+        $hashedPassword=password_hash($newPassword,PASSWORD_BCRYPT);
+        $sqlupdateText="UPDATE SEI_User SET password='$hashedPassword' WHERE email='$userName'";
+        $sql=$conn->query($sqlupdateText);}
+
+      if($newContactNumber==""){
+        $sqlupdateText="UPDATE SEI_User SET tel='$newContactNumber' WHERE email='$userName'";
+        $sql=$conn->query($sqlupdateText);}
+
+
+   }
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -20,15 +46,15 @@
         <form action="account.php" method="post">
           <p></p>
           <hr>
-                <p align="left"><font color="red">*</font><b>New Name :</b>
-                <input style="height:30px;"  class="form-control" type="text" placeholder="Enter Email" name="newName">
+                <p align="left"><b>New Name :</b>
+                <input style="height:30px;"  class="form-control" type="text" placeholder="Enter New Name..." name="newName">
                 </p>
 
-                <p align="left"><font color="red">*</font><b>New Password:</b>
-                <input style="height:30px;"  class="form-control" type="password" placeholder="Enter Password" name="newPassword" >
+                <p align="left"><b>New Password:</b>
+                <input style="height:30px;"  class="form-control" type="password" placeholder="Enter New Password..." name="newPassword" >
                 </p>
 
-                <p align="left"><font color="red">*</font><b>New Contact Number:</b>
+                <p align="left"><b>New Contact Number:</b>
                 <input style="height:30px;"  class="form-control" type="number" placeholder="Enter Password" name="newContactNumber" >
                 </p>
 
@@ -36,12 +62,15 @@
                 <br>
                 <button type="submit" class="btn btn-primary" name="submit" >Save</button>
 
-                
+
             </p>
                   <?php if ($msg != "") echo $msg . "<br><br>" ?>
             <br>
             <br>
-
+          </form>
+         </div>
+        </div>
+      </div>
 
 
   </body>

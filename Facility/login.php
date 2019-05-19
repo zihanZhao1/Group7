@@ -71,11 +71,11 @@
     <p></p>
     <hr>
           <p align="left"><font color="red">*</font><b>Email:</b>
-          <input style="height:30px;"  class="form-control" type="email" placeholder="Enter Email" name="email" required>
+          <input style="height:30px;"  class="form-control" type="email" placeholder="Enter Email..." name="email" required>
           </p>
 
           <p align="left"><font color="red">*</font><b>Password:</b>
-          <input style="height:30px;"  class="form-control" type="password" placeholder="Enter Password" name="password" required>
+          <input style="height:30px;"  class="form-control" type="password" placeholder="Enter Password..." name="password" required>
           </p>
           <br>
           <br>
