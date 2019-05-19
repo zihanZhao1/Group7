@@ -1,3 +1,8 @@
+<?php
+ session_start();
+ require "functions.php";
+ ?>
+
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -7,15 +12,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Administration - Durham University</title>
+    <title>...</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/index.css" type="text/css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body  class="home">
 <!--  -->
-<!--  -->		<div class="container-fluid">
+<!--  -->
+<div class="container-fluid">
     <div id="header" class="row-fluid">
         <div class="span12">
             <h1>
@@ -31,33 +41,65 @@
                 </a>
             </h1>
         </div>
-    </div>		<div id="navigation" class="row-fluid">
+    </div>
+    	<div id="navigation" class="row-fluid">
         <div class="span12">
             <ul class="nav nav-pills">
                 <li><a href="#0">Home</a></li>
                 <li><a href="facility.php">Facilities</a></li>
                 <li><a href="course.php">Courses</a></li>
-                <li><a href="calendar_All">Calendar</a></li>
-                <li><a href="booking.php">Bookings</a></li>
+                <li><a href="#3">Calendar</a></li>
+                <li><a href="#4">Bookings</a></li>
                 <li><a href="news.php">News</a></li>
+                <li style="margin-right:auto!important"><a href="help.html">Help</a></li>
+                <li style="margin-right:auto!important"><form method="post" action="../Facility/search.php" class="form-inline mt-2 mt-md-0">
+
+                      <input class="form-control mr-sm-2" type="text"  placeholder="Search..." aria-label="Search" style="height: 35px; border-radius:5px; margin-top: 4px;" name="search" >
+
+                      <select name="column" class="custom-select" style="border-radius: 5px;margin-top:5px;font-size:12px; height:35px">
+                        <option value="select">Select Filter</option>
+                        <option value="title">Title</option>
+                        <option value="name">Name</option>
+                        <option value="date">Date</option>
+                        <option value="content">Content</option>
+                        <option value="overall">Overall</option>
+                      </select>
+                      <button type="sumbit" name="submit" style="border-radius: 50px;margin-top: 5px;margin-left: 5px;border-top-width: 1px;padding-top: 5px;padding-bottom: 6px;padding-right: 9px;padding-left: 9px;"><i class="fa fa-search"></i></button>
+
+                    </form>
+                </li>
+                <li>
+                  <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" style="background:#321f20; border:0px; box-shadow:none; webkit-box-shadow:none; margin-top:5px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ...
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" id="login" href="../Facility/login.php">Log In</a>
+                    <a class="dropdown-item" id="register" href="../Facility/register.php">Register</a>
+                    <a class="dropdown-item" id="logout" style="display:none;" href="../Facility/logout.php">Log Out</a>
+                    <a class="dropdown-item" id="logout" href="../Facility/account.php">My Account</a>
+
+
+                  </div>
+                </div>
+              </li>
+
+
             </ul>
         </div>
-    </div>		<!--<div id="content" class="row-fluid">
-    <div class="span3 pages">
-        <ul>
-            <li class='navcurrent'><a  href="#6"> My Details</strong></li>
-            <li class='sideways'><a  href="#7" >My bookings</a></li>
     </div>
-</div> -->
+</div>
+<script>
+<?php
+if(isset($_SESSION["userName"])){
 
-    <!--
-<div id="sponsor" class="row-fluid">
-<div class="span12">
-    Team Durham kindly sponsored by
-    [currently unspecified]
-</div>
-</div>
--->	</div>
+  echo 'document.getElementById("login").style.display="none";';
+  echo 'document.getElementById("logout").style.display="block";';
+
+}
+ ?>
+</script>
+
 <div class="container-fluid no-border">
     <div id="footer" class="row-fluid">
         <div class="span12">
@@ -72,7 +114,7 @@
                 }
             </script>
 
-            <script type="text/javascript" src="index.js"></script>
+            <script type="text/javascript" src="../js/index.js"></script>
             <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9Q3S4"
                               height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
