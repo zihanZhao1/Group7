@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    for (var i = 0; i < allActivity.length; i++) {
-        allActivity[i].allDay = false
+    for (var i = 0; i < allBooking.length; i++) {
+        allBooking[i].allDay = false
     }
 
 //Sat May 11 2019 12:00:00 GMT+0100 (英国夏令时间)
@@ -19,7 +19,8 @@ $(document).ready(function () {
                 today: 'Today'
             },
             editable: false,
-            events: allActivity,
+            events: allBooking,
         });
     }
 });
+
