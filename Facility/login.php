@@ -1,5 +1,8 @@
 <?php
-  session_start();
+  //session_start();
+  include_once "../php/head.php";
+
+
 
   $msg="";
   require"conn.php";
@@ -22,14 +25,15 @@
                     $msg="Please verify your email!";
                   else{
                       $_SESSION["userName"]=$email;
-                      
-                      if($data['role']=="admin")
-                      header(logo.php);
-                      //admin 登陸頁面
-                      else{
-                      $msg="You have been logged in";
 
-                      header();
+                      if($data['role']=="admin")
+                      //header(logo.php);
+                      //admin 登陸頁面
+                      $msg="admin homepage";
+                      else{
+                      $msg="You have been logged in!";
+                       //redirectToLoginPage();
+                      //header('Location:search.php');
                         //user 登陸頁面
                       }
                     }
@@ -55,39 +59,55 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
   <div class="container" style="margin-top:100px;">
     <div class="row justify-content-center">
       <div class="col-md-6 col-md-offset-3" align="center">
-        <img src="logo.png"><br><br>
+      <br>
+      <br>
 <!--  Sign Up form-->
   <form action="Login.php"  method="post">
-    <h1>Log In</h1>
+    <h1 style="color:#742e68;">Log In</h1>
     <p></p>
     <hr>
-    <table>
-      <tr>
-          <td align="left"><font color="red">*</font><b>Email:</b></td>
-          <td><input  class="form-control" type="email" placeholder="Enter Email" name="email" required></td>
-      </tr>
-      <tr>
-          <td align="left"><font color="red">*</font><b>Password:</b></td>
-          <td><input  class="form-control" type="password" placeholder="Enter Password" name="password" required></td>
-      </tr>
+          <p align="left"><font color="red">*</font><b>Email:</b>
+          <input style="height:30px;"  class="form-control" type="email" placeholder="Enter Email" name="email" required>
+          </p>
+
+          <p align="left"><font color="red">*</font><b>Password:</b>
+          <input style="height:30px;"  class="form-control" type="password" placeholder="Enter Password" name="password" required>
+          </p>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary" name="submit" >Log In</button>
+
+          <p><a class="forgot" href="forgotPassword.php" rel="noopener" style="color:#aab8c2; background=transparent">Forgot Password?</a>
+      </p>
             <?php if ($msg != "") echo $msg . "<br><br>" ?>
       <br>
       <br>
-      <tr>
-        <td><button type="submit" class="btn btn-primary" name="submit" >Log In</button></td>
-      </tr>
 
-      </table>
+
+
+
+
+
     </form>
   </div>
  </div>
 </div>
 
 
+<script>
+<?php
+if(isset($_SESSION["userName"])){
 
+  echo 'document.getElementById("login").style.display="none";';
+  echo 'document.getElementById("logout").style.display="block";';
+
+}
+ ?>
+</script>
 
 </body>
 </html>

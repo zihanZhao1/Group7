@@ -1,3 +1,4 @@
+
 <?php
 
   function generateNewString($len=10){
@@ -12,6 +13,8 @@
     header('Location:login.php');
     exit();
   }
+
+
   class TableRows extends RecursiveIteratorIterator {
     function __construct($it) {
         parent::__construct($it, self::LEAVES_ONLY);
@@ -35,8 +38,8 @@
     $query=$conn->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
-      echo "<table style='border: solid 1px black;'>";
-      echo "<tr><th>ID</th><th>Title</th><th>Start Time</th><th>End Time</th></tr>";
+      echo "<table class='table'>";
+      echo "<thead class='thead-dark'><tr><th>ID</th><th>Title</th><th>Start Time</th><th>End Time</th></tr><thead>";
 
       $stmt=$conn->prepare($sql);
       $stmt->execute();
@@ -58,8 +61,8 @@
     $query=$conn->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
-      echo "<table style='border: solid 1px black;'>";
-      echo "<tr><th>ID</th><th>Name</th><th>Weeks</th><th>Times</th><th>Start Times</th></tr>";
+      echo "<table class='table'>";
+      echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Weeks</th><th>Times</th><th>Start Times</th></tr><thead>";
 
 
       $stmt=$conn->prepare($sql);
@@ -83,8 +86,8 @@
     $query=$conn->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
-      echo "<table style='border: solid 1px black;'>";
-      echo "<tr><th>ID</th><th>Name</th><th>Capability</th><th>Open Times</th><th>Close Times</th><th>Price</th><th>Image</th><th>Info</th></tr>";
+      echo "<table class='table'>";
+      echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Capability</th><th>Open Times</th><th>Close Times</th><th>Price</th><th>Image</th><th>Info</th></tr><thead>";
 
 
       $stmt=$conn->prepare($sql);
@@ -107,8 +110,8 @@
     $query=$conn->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
-      echo "<table style='border: solid 1px black;'>";
-      echo "<tr><th>ID</th><th>Name</th><th>Times</th><th>Content</th></tr>";
+      echo "<table class='table'>";
+      echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Times</th><th>Content</th></tr><thead>";
 
       $stmt=$conn->prepare($sql);
       $stmt->execute();

@@ -1,8 +1,15 @@
+
 <?php
-   require_once "functions.php";
-var_dump($_POST);
+  include_once "../php/head.php";
+?>
+<div class="container-fluid">
+
+  <?php
+  require_once "functions.php";
+  //var_dump($_POST);
 
     require"conn.php";
+
 if(count($_POST)>0){
     $search=$_POST['search'];
     $search=filter_var($search,FILTER_SANITIZE_STRING);
@@ -35,7 +42,7 @@ if(count($_POST)>0){
     }
 
 
-    }
+
 
     if ($column == "overall"){
       $sql="SELECT E_ID,title,start,end_time FROM sei_event WHERE UPPER (title) LIKE UPPER ('%$search%')";
@@ -51,29 +58,8 @@ if(count($_POST)>0){
       sqltodataContent($sql);
 
     }
+    }
+
 ?>
 
-
-
- <!DOCTYPE html>
- <html lang="en" dir="ltr">
-   <head>
-     <meta charset="utf-8">
-     <title>PHP Search Form</title>
-   </head>
-   <body>
-     <form method="post" action="search.php">
-       <input type="text" name="search" placeholder="Search...">
-       <select name="column" class="column">
-         <option value="select">Select Filter</option>
-         <option value="title">Title</option>
-         <option value="name">Name</option>
-         <option value="date">Date</option>
-         <option value="content">Content</option>
-         <option value="overall">Overall</option>
-       </select>
-       <input type="submit" name="submit" value="Find">
-     </form>
-
-   </body>
- </html>
+</div>

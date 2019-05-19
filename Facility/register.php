@@ -1,4 +1,5 @@
 <?php
+include_once "../php/head.php";
 $msg="";
 require"conn.php";
 use PHPMailer\PHPMailer\PHPMailer;
@@ -6,9 +7,9 @@ use PHPMailer\PHPMailer\Exception;
 
 
 $msg = "";
-  if (isset($_POST['cancel'])){
-        header("location:...");
-  }
+  //if (isset($_POST['cancel'])){
+      //  header('Location:login.php');
+  //}
 
   if (isset($_POST['submit']))
   {
@@ -99,45 +100,48 @@ $msg = "";
   <div class="container" style="margin-top:100px;">
     <div class="row justify-content-center">
       <div class="col-md-6 col-md-offset-3" align="center">
-        <img src="logo.png"><br><br>
+      <//img src="logo.png"><br><br>
 
-        <?php if ($msg != "") echo $msg . "<br><br>" ?>
+        <?php if ($msg != "") echo "<p> <font color=red size='4px'>  $msg . <br><br> </font></p>"; ?>
 
 <!--  Sign Up form-->
   <form action="register.php"  method="post">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
+    <h1 style="color:#742e68;">Register</h1>
+    <p style="color:#742e68;">Please fill in this form to create an account.</p>
     <hr>
 
-          <p align="left"><font color="red">*</font>
-          <input class="form-control"  type="text" placeholder="Enter Name" name="name" required>
-        </p>
+          <p align="left"><font color="red">*</font><b>Name:</b>
+          <input style="height:30px;" class="form-control"  type="text" placeholder="Enter Name..." name="name" required>
+         </p>
 
-          <p align="left"><font color="red">*</font>
-          <td><input  class="form-control" type="email" placeholder="Enter Email" name="email" required>
+          <p align="left"><font color="red">*</font><b>Email:</b>
+          <td><input style="height:30px;" class="form-control" type="email" placeholder="Enter Email..." name="email" required>
+          </p>
+
+          <p align="left"><font color="red">*</font><b>Contact Number:</b>
+          <input style="height:30px;" class="form-control" type="number" placeholder="Enter Contact Number..." name="telNumber" required>
+          </p>
 
 
-          <font color="red">*</font>
-          <input  class="form-control" type="number" placeholder="Enter Contact Number" name="telNumber" required>
+          <p align="left"><font color="red">*</font><b>Password:</b>
+          <input style="height:30px;" class="form-control" type="password" placeholder="Enter Password..." name="password" required>
+          </p>
 
-          <p align="left"><font color="red">*</font>
-          <input  class="form-control" type="password" placeholder="Enter Password" name="password" required>
-
-          <p align="left"><font color="red">*</font>
-          <input  class="form-control" type="password" placeholder="Repeat Password" name="password1" required>
+          <p align="left"><font color="red">*</font><b>Repeat Password:</b>
+          <input style="height:30px;" class="form-control" type="password" placeholder="Repeat Password..." name="password1" required>
+          </p>
 
       <br>
       <br>
 
-        <button type="submit" class="btn btn-primary" name="submit" style="background-color: indigo; border:0px;">Register</button>
-        <button type="button" class="btn btn-primary" name="cancel" style="background-color: indigo; border:0px;" >Cancel</button>
+        <button type="submit" class="btn btn-primary" name="submit" style="background:#742e68; border:0px;">Register</button>
+      <!--<button type="button" class="btn btn-primary" name="cancel" style="background-color: indigo; border:0px;" >Cancel</button>-->
 
-        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p></td>
-
-      <p>
-		      Already a member? <a href="login.php">Sign in</a>
-	    </p>
     </form>
+
+            <p align=left style="font-size:14px">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p></td>
+
+            <p align=left style="font-size:14px">Already a member? <a href="login.php">Sign in</a></p>
 
   </div>
  </div>
