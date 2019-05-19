@@ -9,7 +9,7 @@
     <?php
     include 'conn.php';
     include 'facility.php';
-    require_once 'head.html';
+    require_once 'head.php';
     ?>
     <div id="content" class="row-fluid">
         <div class="span3 pages">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <?php require_once 'foot.html'?>
+    <?php require_once 'foot.php' ?>
 </div>
 </body>
 </html>

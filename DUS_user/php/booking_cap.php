@@ -27,12 +27,12 @@ if (isset($_GET['num'])) {
     $num = $_SESSION['num'];
 }
 
-$maxCap = $maxCap - $num;
-
 if($num>$maxCap){
-    echo "<script> alert('Max capability is: ')</script>";
-    $num = 0;
+    echo "<h3>Sorry, our max capability is: ".$tmpMC."</h3>";
+    exit();
 }
+
+$maxCap = $maxCap - $num;
 
 $sql = "select * from sei_booking where F_ID=$Fid;";
 $statement = $pdo->query($sql);
@@ -52,11 +52,6 @@ while ($booking = $statement->fetch(PDO::FETCH_ASSOC)) {
     }
 }
 
-if(max($takenNum)<$num){
-    echo "<script> alert('Sorry, out of places.Please select another date.')</script>";
-    $num = 0;
-}
-
 //    echo json_encode($remainNum);
 $remain = array();
 for ($i = 7; $i < 23; $i++) {
@@ -74,6 +69,8 @@ for ($i = 7; $i < 23; $i++) {
 
 echo "<form action='bookingserver.php' method='post'>";
 echo "<h3>$date</h3>";
+
+$isNULL = TRUE;
 foreach ($remain as $r) {
     if ($r['title'] >= 0) {
         if ($num != 0) {
@@ -82,11 +79,16 @@ foreach ($remain as $r) {
         } else {
             echo "<p>" . $r['start'] . ' - ' . $r['end'] . '  ' . "Remain: " . $r['title'] . "</p>";
         }
+        $isNULL = False;
     }
+}
+if ($isNULL){
+    exit("<h3>Sorry, we don't have enough place for you.<br>Please choose another date.</h3>");
 }
 if($num!=0){
     echo "<input type='submit' value='Submit' class='btn btn-primary'>";
 }
+
 echo "</form>";
 
 function isSameDays($last_date, $this_date)

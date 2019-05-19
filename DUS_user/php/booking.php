@@ -1,6 +1,6 @@
 <?php
 include("conn.php");
-session_start();
+//session_start();
 ?>
 <html>
 <head>
@@ -43,7 +43,9 @@ session_start();
                     data: num,
                     method: 'get',
                     success: function (data) {
+
                         $('.content').html(data);
+
                     },
                     fail: function fail() {
                         alert("Failed")
@@ -56,7 +58,7 @@ session_start();
 
 <body class="home">
 <div class="container-fluid">
-    <?php require_once 'head.html' ?>
+    <?php require_once 'head.php' ?>
     <div id="content" class="row-fluid">
         <div class="span4 pages">
             <div style="margin-left: 20px">
@@ -124,7 +126,7 @@ session_start();
         </div>
     </div>
 </div>
-<?php require_once 'foot.html' ?>
+<?php require_once 'foot.php' ?>
 
 <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../js/fullcalendar.min.js"></script>
