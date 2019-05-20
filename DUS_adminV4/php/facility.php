@@ -34,7 +34,7 @@
                 echo "<tr>";
                 echo "<td><input type='checkbox' name='checkboxes[]'  value='{$row['F_ID']}' />" . "</td>";
                 echo "<td>" . $row["F_ID"] . "</td>";
-                echo '<td><img src="image/'.$row['name'].'.jpg" /></td>';
+                echo '<td><img src="../image/'.$row['name'].'.jpg" /></td>';
                 echo "<td>" . $row["name"] . "</td>";
                 echo "<td>" . $row["price"] . "</td>";
                 echo "<td>" . $row["price"] * $a . "</td>";
