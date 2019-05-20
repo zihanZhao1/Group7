@@ -3,8 +3,10 @@
   use PHPMailer\PHPMailer\PHPMailer;
   require_once "functions.php";
 
-  if(isset($_POST['email'])){
+  var_dump($_POST);
+  if(isset($_POST['reset'])){
     require"conn.php";
+
 
     $email=$_POST['email'];
 
@@ -64,17 +66,19 @@
         <br>
         <br>
 
-  <form action="Login.php"  method="post">
+  <form action="login.php"  method="post">
           <h1 style="color:#742e68;">Reset Password</h1>
-          <p></p>
           <hr>
         <p align="left"><font color="red">*</font><b>Please Enter Your Emaill Address:</b>
+        </p>
         <input class="form-control" id="email" placeholder="Email Address..." required><br>
         <br><br>
-        <input type="button" class="btn btn-primary" value="Reset Password">
+        <input type="button" class="btn btn-primary" value="Reset Password" id="reset"><p id="response"></p>
         <br><br>
-        <p id="response"></p>
+
       </form>
+
+
       </div>
     </div>
    </div>
