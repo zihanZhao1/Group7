@@ -57,7 +57,11 @@ include("conn.php");
 
 <body class="home">
 <div class="container-fluid">
-    <?php require_once 'head_user.php' ?>
+    <?php require_once 'head_user.php';
+    if ($_SESSION['username'] = null) {
+        echo "<script> alert('Please login'),window.location.href='login.php'</script>";
+    }
+    ?>
     <div id="content" class="row-fluid">
         <div class="span4 pages">
             <div style="margin-left: 20px">
@@ -134,8 +138,8 @@ include("conn.php");
                 <td>Delete</td>
             </tr>
             <?php
-            //                $user = $_SESSION['username'];
-            $user = 1;
+            $user = $_SESSION['username'];
+            //            $user = 1;
             $res = $pdo->query("SELECT  `B_ID` ,  `start` ,  `end` ,  `count` , sei_facility.name
 FROM  `sei_booking` , sei_facility
 WHERE sei_booking.U_ID =1
