@@ -97,7 +97,7 @@ $msg = "";
   <div class="container" style="margin-top:100px;">
     <div class="row justify-content-center">
       <div class="col-md-6 col-md-offset-3" align="center">
-      <//img src="logo.png"><br><br>
+    <br><br>
 
         <?php if ($msg != "") echo "<p> <font color=red size='4px'>  $msg . <br><br> </font></p>"; ?>
 
