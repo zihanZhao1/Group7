@@ -32,14 +32,14 @@
                       //echo "<script> location.replace('http://locahost/Group7/DUS_user/php/admin.php');<script>";
                       $msg="admin homepage";
                       else($data['role']=="trainer"){
-                        echo "<script> location.replace('http://locahost/Group7/DUS_user/php/course.php');<script>";
+                        echo "<script> location.replace('course.php');<script>";
                       }
                       else{
                       $msg="You have been logged in!";
                        //redirectToLoginPage();
                       //header('Location:search.php');
                         //user 登陸頁面
-                        //echo "<script> location.replace('http://locahost/Group7/DUS_user/php/facility.php');<script>";
+                      echo "<script> location.replace('facility.php');<script>";
                       }
                     }
                 }else
