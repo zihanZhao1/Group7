@@ -302,8 +302,9 @@ where sei_facility.F_ID= sei_booking.F_ID ");
         </div>
 		    </div>
 </form>
-
-
+<?php
+require_once('foot.php');
+?>
 </body>
 </html>
 
