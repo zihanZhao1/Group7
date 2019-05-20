@@ -1,5 +1,5 @@
 <?php
-include_once "head.php";
+include_once "head_user.php";
 $msg="";
 require"conn.php";
 use PHPMailer\PHPMailer\PHPMailer;
@@ -7,9 +7,6 @@ use PHPMailer\PHPMailer\Exception;
 
 
 $msg = "";
-  //if (isset($_POST['cancel'])){
-      //  header('Location:login.php');
-  //}
 
   if (isset($_POST['submit']))
   {
@@ -45,7 +42,7 @@ $msg = "";
                   ':telNumber'=>$telNumber
                 ));
 
-                include_once "phpmailer/phpmailer.php";
+                require '../phpmailer/vendor/autoload.php';
 
                 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
                 try {
@@ -62,7 +59,7 @@ $msg = "";
                     $mail->Port = 587;                                    // TCP port to connect to
 
                     //Recipients
-                    $mail->setFrom('chenchang1995.96@gmail.com', 'Sport Team');
+                    $mail->setFrom('chenchang1995.96@gmail.com', 'Durham Sport Team');
                     $mail->addAddress($email, $name);   // Add a recipient
 
                     //Content
@@ -71,7 +68,7 @@ $msg = "";
                     $mail->Body    = "
                           Please click on the link below:<br><br>
 
-                          <a href='http://localhost/Facility/confirm.php?email=$email&token=$token'>Click here</a>";
+                          <a href='http://localhost/Group7/DUS_user/php/confirm.php?email=$email&token=$token'>Click here</a>";
                     if($mail->send())
                       $msg="You have been registered! Please verify your email!";
                     else
