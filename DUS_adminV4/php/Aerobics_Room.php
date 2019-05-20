@@ -62,7 +62,9 @@ if (restore) selObj.selectedIndex=0;
 	</div>	
 </div>
 
-
+<?php
+require_once('foot.php');
+?>
 
 </body>
 </html>
