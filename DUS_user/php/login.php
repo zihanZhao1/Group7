@@ -1,6 +1,6 @@
 <?php
   //session_start();
-  include_once "head.php";
+  include_once "head_user.php";
 
 
 
@@ -35,7 +35,7 @@
                        //redirectToLoginPage();
                       //header('Location:search.php');
                         //user 登陸頁面
-                        echo "<script> location.href=\"facility.php\;<script>";
+                        echo "<script> location.replace('http://locahost/Group7/DUS_user/php/facility.php');<script>";
                       }
                     }
                 }else
@@ -104,6 +104,7 @@
 if(isset($_SESSION["userName"])){
 
   echo 'document.getElementById("login").style.display="none";';
+  echo 'document.getElementById("register").style.display="none";';
   echo 'document.getElementById("logout").style.display="block";';
 
 }
