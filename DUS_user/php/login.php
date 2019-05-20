@@ -35,6 +35,7 @@
                        //redirectToLoginPage();
                       //header('Location:search.php');
                         //user 登陸頁面
+                        echo "<script> location.href=\"facility.php\;<script>";
                       }
                     }
                 }else
@@ -109,5 +110,8 @@ if(isset($_SESSION["userName"])){
  ?>
 </script>
 
+<?php
+ require "foot.php";
+ ?>
 </body>
 </html>

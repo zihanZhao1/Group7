@@ -1,5 +1,5 @@
 <?php
- include_once "head.php";
+ include_once "head_user.php";
 
    $msg="";
    require"conn.php";
@@ -72,6 +72,8 @@
         </div>
       </div>
 
-
+<?php 
+ require "foot.php";
+ ?>
   </body>
 </html>

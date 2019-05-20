@@ -1,6 +1,6 @@
 
 <?php
-  include_once "head.php";
+  include_once "head_user.php";
 ?>
 <div class="container-fluid">
 
@@ -59,6 +59,8 @@ if(count($_POST)>0){
 
     }
     }
+    
+     require "foot.php";
 
 ?>
 
