@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `sei_course`;
 CREATE TABLE IF NOT EXISTS `sei_course` (
   `C_ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` text COLLATE utf8_bin NOT NULL,
-  `times` text COLLATE utf8_bin NOT NULL,
+  `time` text COLLATE utf8_bin NOT NULL,
   `weeks` int(11) NOT NULL,
   `start` date NOT NULL,
   PRIMARY KEY (`C_ID`)
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `sei_event` (
   `title` text COLLATE utf8_bin NOT NULL,
   `url` text COLLATE utf8_bin NOT NULL,
   `start` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
+  `end` datetime NOT NULL,
   `scale` int(11) NOT NULL,
   PRIMARY KEY (`E_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4234 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -181,7 +181,7 @@ CREATE TABLE `SEI_User` (
 
 INSERT INTO `SEI_User` (`U_ID`, `name`, `email`, `password`, `isEmailConfirmed`, `token`, `tokenExpire`, `tel`, `role`) VALUES
 (9, 'xiaowei cheng', 'chang.chen@durham.ac.uk', '$2y$10$2WF9MQwiTYQXX1FVAW16YOPMYDikGFKCpU.xMDbmN3QbyLDMM8w2O', 0, '8DlUK@7h3H', '0000-00-00 00:00:00', '1616914985', ''),
-(13, 'emma', '873467017@qq.com', '$2y$10$Ae9wV.9PsT4dvt1vD7BnL.eqnxTbiVCF4ye45UWMcqLopuVVlVdVm', 1, '', '2019-05-14 00:23:22', '7482377563', '');
+(8888, 'emma', '873467017@qq.com', '$2y$10$Ae9wV.9PsT4dvt1vD7BnL.eqnxTbiVCF4ye45UWMcqLopuVVlVdVm', 1, '', '2019-05-14 00:23:22', '7482377563', '');
 
 --
 -- 转储表的索引
