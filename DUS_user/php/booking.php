@@ -1,6 +1,5 @@
 <?php
 include("conn.php");
-//session_start();
 ?>
 <html>
 <head>
@@ -58,7 +57,7 @@ include("conn.php");
 
 <body class="home">
 <div class="container-fluid">
-    <?php require_once 'head.php' ?>
+    <?php require_once 'head_user.php' ?>
     <div id="content" class="row-fluid">
         <div class="span4 pages">
             <div style="margin-left: 20px">
@@ -102,7 +101,6 @@ include("conn.php");
                     <input type="number" id="num" name="num"><br>
                     <input type="submit" value="Confirm" class="btn btn-primary"><br>
                 </form>
-
             </div>
         </div>
 
@@ -124,6 +122,35 @@ include("conn.php");
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <h3 align="center">Your bookings</h3>
+        <table border="1" width="100%" cellpadding="10" cellspacing="10">
+            <tr>
+                <td>Facility</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Count</td>
+                <td>Delete</td>
+            </tr>
+            <?php
+            //                $user = $_SESSION['username'];
+            $user = 1;
+            $res = $pdo->query("SELECT  `B_ID` ,  `start` ,  `end` ,  `count` , sei_facility.name
+FROM  `sei_booking` , sei_facility
+WHERE sei_booking.U_ID =1
+AND sei_facility.F_ID = sei_booking.F_ID;");
+            foreach ($res as $row) {
+                echo "<tr>";
+                echo "<td>" . $row["name"] . "</td>";
+                echo "<td>" . $row["start"] . "</td>";
+                echo "<td>" . $row["end"] . "</td>";
+                echo "<td>" . $row["count"] . "</td>";
+                echo "<td><button type='button' class='btn btn-primary'><a href='delete_booking.php?id={$row['B_ID']}'>Delete</a></button ></td>";
+            }
+            ?>
+        </table>
+
     </div>
 </div>
 <?php require_once 'foot.php' ?>

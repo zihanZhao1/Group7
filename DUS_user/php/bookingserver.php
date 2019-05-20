@@ -3,11 +3,12 @@
 session_start();
 include 'conn.php';
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//$uid = $_SESSION['user'];
-$uid = 1;
+//$uid = $_SESSION['username'];
+//$uid = 1;
 $Fid = $_SESSION['facility'];
 $num = $_SESSION['num'];
 $date = $_SESSION['date'];

@@ -94,7 +94,7 @@ require "functions.php";
                            aria-expanded="false">
                             ...
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" id="login" href="login.php">Log In</a>
                             <a class="dropdown-item" id="register" href="register.php">Register</a>
                             <a class="dropdown-item" id="logout" style="display:none;" href="logout.php">Log
