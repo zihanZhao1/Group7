@@ -337,5 +337,8 @@
 
     </div>
 </form>
+    <?php
+require_once('foot.php');
+?>
 </body>
 </html>
