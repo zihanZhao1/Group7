@@ -1,4 +1,5 @@
 <?php
+  include_once "head_user.php";
   use PHPMailer\PHPMailer\PHPMailer;
   require_once "functions.php";
 
@@ -19,12 +20,15 @@
 
 	    $pdo->query("UPDATE SEI_User SET token='$token', tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email='$email'" );
 
+      /*
       require_once "phpmailer/phpmailer.php";
       require_once "phpmailer/Exception.php";
+      */
+
+      require '../phpmailer/vendor/autoload.php';
 
 
-
-      $mail->setFrom('chenchang1995.96@gmail.com', 'Sport Team');
+      $mail->setFrom('chenchang1995.96@gmail.com', 'Durham Sport Team');
       $mail->addAddress($email);
       $mail->Subject = 'Reset Password';
       $mail->isHTML(true);
@@ -34,7 +38,7 @@
             <a href='http://localhost/Facility/resetPassword.php?email=$email&token=$token'>Click here</a>http://localhost/Facility/resetPassword.php?email=$email&token=$token
             ";
       if ($mail->send())
-          exit (json_encode(array('status' =>1 , "msg"=>"Please check your Email Inbox!")));
+          exit (json_encode(array('status' =>1 , "msg"=>"Verification needed. We'll send a code to your email to verify your identity. Please check your Email Inbox!")));
       else {
         exit (json_encode(array('status' =>0 , "msg"=>"Error! Please try again!")));
       }
@@ -57,11 +61,20 @@
   <div class="container" style="margin-top:100px;">
     <div class="row justify-content-center">
       <div class="col-md-6 col-md-offset-3" align="center">
-        <img src="logo.png"><br><br>
-        <input class="form-control" id="email" placeholder="Your Email Address"><br>
+        <br>
+        <br>
+
+  <form action="Login.php"  method="post">
+          <h1 style="color:#742e68;">Reset Password</h1>
+          <p></p>
+          <hr>
+        <p align="left"><font color="red">*</font><b>Please Enter Your Emaill Address:</b>
+        <input class="form-control" id="email" placeholder="Email Address..." required><br>
+        <br><br>
         <input type="button" class="btn btn-primary" value="Reset Password">
         <br><br>
         <p id="response"></p>
+      </form>
       </div>
     </div>
    </div>
