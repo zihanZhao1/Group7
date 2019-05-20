@@ -44,6 +44,7 @@
         <br>
 
         <form action="account.php" method="post">
+          <h1 style="color:#742e68;"> Security</h1>
           <p></p>
           <hr>
                 <p align="left"><b>New Name :</b>
@@ -72,7 +73,7 @@
         </div>
       </div>
 
-<?php 
+<?php
  require "foot.php";
  ?>
   </body>
