@@ -65,14 +65,14 @@ require "functions.php";
                 <li><a href="booking.php?id=0">Booking</a></li>
                 <li><a href="help.html">Help</a></li>
                 <li style="margin-right:auto!important"><a href="help.html">Help</a></li>
-                <li style="margin-right:auto!important">
+                <li>
                     <form method="post" action="search.php" class="form-inline mt-2 mt-md-0">
 
                         <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search"
-                               style="height: 35px; border-radius:5px; margin-top: 4px;" name="search">
+                               style="height: 35px; border-radius:5px; margin-top: 15px;" name="search">
 
                         <select name="column" class="custom-select"
-                                style="border-radius: 5px;margin-top:5px;font-size:12px; height:35px">
+                                style="border-radius: 5px;margin-top:15px;font-size:12px; height:35px">
                             <option value="select">Select Filter</option>
                             <option value="title">Title</option>
                             <option value="name">Name</option>
@@ -81,7 +81,7 @@ require "functions.php";
                             <option value="overall">Overall</option>
                         </select>
                         <button type="sumbit" name="submit"
-                                style="border-radius: 50px;margin-top: 5px;margin-left: 5px;border-top-width: 1px;padding-top: 5px;padding-bottom: 6px;padding-right: 9px;padding-left: 9px;">
+                                style="border-radius: 50px;margin-top: 15px;margin-left: 5px;border-top-width: 1px;padding-top: 5px;padding-bottom: 6px;padding-right: 9px;padding-left: 9px;">
                             <i class="fa fa-search"></i></button>
 
                     </form>
@@ -89,17 +89,16 @@ require "functions.php";
                 <li>
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle"
-                           style="background:#321f20; border:0px; box-shadow:none; webkit-box-shadow:none; margin-top:5px;"
+                           style="background:#321f20; border:0px; box-shadow:none; webkit-box-shadow:none; margin-top:10px;"
                            href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
-                            ...
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                           <i class="fa fa-user-circle" aria-hidden="false" style="font-size: 34px;"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" id="login" href="login.php">Log In</a>
                             <a class="dropdown-item" id="register" href="register.php">Register</a>
                             <a class="dropdown-item" id="logout" style="display:none;" href="logout.php">Log
                                 Out</a>
-                            <a class="dropdown-item" id="logout" href="account.php">My Account</a>
+                            <a class="dropdown-item" id="myAccount" href="account.php">My Account</a>
                         </div>
                     </div>
                 </li>
@@ -111,6 +110,7 @@ require "functions.php";
     <?php
     if (isset($_SESSION["userName"])) {
         echo 'document.getElementById("login").style.display="none";';
+        echo 'document.getElementById("register").style.display="none";';
         echo 'document.getElementById("logout").style.display="block";';
     }
     ?>
