@@ -35,13 +35,13 @@
   function sqltodataEvent($sql){
 
     require"conn.php";
-    $query=$conn->query($sql);
+    $query=$pdo->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
       echo "<table class='table'>";
       echo "<thead class='thead-dark'><tr><th>ID</th><th>Title</th><th>Start Time</th><th>End Time</th></tr><thead>";
 
-      $stmt=$conn->prepare($sql);
+      $stmt=$pdo->prepare($sql);
       $stmt->execute();
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
       foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
@@ -58,14 +58,14 @@
   function sqltodataCourse($sql){
 
     require"conn.php";
-    $query=$conn->query($sql);
+    $query=$pdo->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
       echo "<table class='table'>";
       echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Weeks</th><th>Times</th><th>Start Times</th></tr><thead>";
 
 
-      $stmt=$conn->prepare($sql);
+      $stmt=$pdo->prepare($sql);
       $stmt->execute();
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
       foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
@@ -83,14 +83,14 @@
   function sqltodataFacility($sql){
 
     require"conn.php";
-    $query=$conn->query($sql);
+    $query=$pdo->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
       echo "<table class='table'>";
       echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Capability</th><th>Open Times</th><th>Close Times</th><th>Price</th><th>Image</th><th>Info</th></tr><thead>";
 
 
-      $stmt=$conn->prepare($sql);
+      $stmt=$pdo->prepare($sql);
       $stmt->execute();
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
       foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
@@ -107,13 +107,13 @@
   function sqltodataContent($sql){
 
     require"conn.php";
-    $query=$conn->query($sql);
+    $query=$pdo->query($sql);
     $num_rows=$query->rowCount();
     if($num_rows>0){
       echo "<table class='table'>";
       echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Times</th><th>Content</th></tr><thead>";
 
-      $stmt=$conn->prepare($sql);
+      $stmt=$pdo->prepare($sql);
       $stmt->execute();
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
       foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {

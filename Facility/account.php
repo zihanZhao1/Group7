@@ -15,16 +15,16 @@
 
       if ($newName!="")
         {  $sqlupdateText="UPDATE SEI_User SET name ='$newName'WHERE email='$userName'";
-          $sql=$conn->query($sqlupdateText);}
+          $sql=$pdo->query($sqlupdateText);}
 
       if($newPassword!=""){
         $hashedPassword=password_hash($newPassword,PASSWORD_BCRYPT);
         $sqlupdateText="UPDATE SEI_User SET password='$hashedPassword' WHERE email='$userName'";
-        $sql=$conn->query($sqlupdateText);}
+        $sql=$pdo->query($sqlupdateText);}
 
       if($newContactNumber==""){
         $sqlupdateText="UPDATE SEI_User SET tel='$newContactNumber' WHERE email='$userName'";
-        $sql=$conn->query($sqlupdateText);}
+        $sql=$pdo->query($sqlupdateText);}
 
 
    }

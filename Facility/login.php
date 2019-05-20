@@ -15,7 +15,7 @@
         if ($email == ""|| $password == "")
             $msg="please enter your inputs!";
             else{
-              $sql = $conn->query("SELECT U_ID, password,isEmailConfirmed,role FROM SEI_User WHERE email='$email'");
+              $sql = $pdo->query("SELECT U_ID, password,isEmailConfirmed,role FROM SEI_User WHERE email='$email'");
               $num_rows=$sql->rowCount();
               //var_dump($num_rows);
               if($num_rows>0){

@@ -23,7 +23,7 @@ $msg = "";
         if ($name == ""|| $email == ""|| $password != $password1)
             $msg="please check your inputs!";
             else{
-              $sql = $conn->query("SELECT U_ID FROM SEI_User WHERE email='$email'");
+              $sql = $pdo->query("SELECT U_ID FROM SEI_User WHERE email='$email'");
               $num_rows=$sql->rowCount();
               //var_dump($num_rows);
               if($num_rows>0){
@@ -36,7 +36,7 @@ $msg = "";
                 $hashedPassword=password_hash($password,PASSWORD_BCRYPT);
 
                 $sql="INSERT INTO SEI_User (name,email,password,isEmailConfirmed,token,tel) VALUES(:name,:message,:hashedPassword,'0',:token,:telNumber)";
-                $query=$conn->prepare($sql);
+                $query=$pdo->prepare($sql);
                 $query->execute(array(
                   ':name' => $name,
                   ':message'=> $email,

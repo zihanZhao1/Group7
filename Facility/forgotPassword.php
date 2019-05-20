@@ -9,7 +9,7 @@
 
     var_dump($_POST);
     $sql="SELECT U_ID FROM SEI_User WHERE email='$email'";
-    $query=$conn->query($sql);
+    $query=$pdo->query($sql);
 
     $num_rows=$query->rowCount();
     if($num_rows>0){
@@ -17,7 +17,7 @@
 
     	$token=generateNewString();
 
-	    $conn->query("UPDATE SEI_User SET token='$token', tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email='$email'" );
+	    $pdo->query("UPDATE SEI_User SET token='$token', tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email='$email'" );
 
       require_once "phpmailer/phpmailer.php";
       require_once "phpmailer/Exception.php";
