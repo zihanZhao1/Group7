@@ -9,13 +9,13 @@ $msg = "";
     $email=$_GET['email'];
     $token=$_GET['token'];
 
-      $sql=$pdo->query("SELECT U_ID FROM SEI_User WHERE email='$email' AND token='$token' AND token<>'' AND tokenExpire > NOW()");
+      $sql=$pdo->query("SELECT U_ID FROM sei_user WHERE email='$email' AND token='$token' AND token<>'' AND tokenExpire > NOW()");
 
       $num_rows=$sql->rowCount();
       if($num_rows>0){
         $newPassword=generateNewString();
         $newPasswordEncrypted =password_hash($newPassword, PASSWORD_BCRYPT);
-        $pdo->query("UPDATE SEI_User SET token='', password='$newPasswordEncrypted' WHERE email='$email'");
+        $pdo->query("UPDATE sei_user SET token='', password='$newPasswordEncrypted' WHERE email='$email'");
 
         //echo "Your New Password is $newPassword <br> <a href='login.php'>Click Here To Log In</a>";
       }
@@ -32,7 +32,7 @@ $msg = "";
           $msg="Passwords do not match!";
           else{
             $hashedPassword=password_hash($newPassword,PASSWORD_BCRYPT);
-            $sql="INSERT INTO SEI_User (passwordl) VALUES (:password)";
+            $sql="INSERT INTO sei_user (passwordl) VALUES (:password)";
             $query=$pdo->prepare($sql);
             $query->execute(array(
               ':password' => $hashedPassword
