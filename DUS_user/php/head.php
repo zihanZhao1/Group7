@@ -14,8 +14,6 @@
     <title>Our Facilities - Durham University</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../css/team-durham.css" type="text/css">
-<!--    <link rel="stylesheet" href="../css/index.css" type="text/css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
