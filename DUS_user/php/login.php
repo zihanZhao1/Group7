@@ -25,22 +25,19 @@
                     $msg="Please verify your email!";
                   else{
                       $_SESSION["userName"]=$email;
-
+                      $_SESSION["role"] = $data['role'];
                       if($data['role']=="admin")
 
-                      //admin 登陸頁面
-                      echo "<script> location.replace('http://localhost/Group7/DUS_user/php/admin.php');<script>";
-                      //$msg="admin homepage";
+                      echo '<script> window.location.href="../../admin/php/facility.php";<script>';
+
+
 
                       elseif($data['role']=="trainer"){
-                        echo '<script> location.replace("http://localhost/Group7/DUS_user/php/course.php");</script>';
+                        echo '<script> window.location.href="course.php";</script>';
                       }
                       else{
-                      //$msg="You have been logged in!";
-                       //redirectToLoginPage();
 
-                        //user 登陸頁面
-                      echo '<script> location.replace("http://localhost/Group7/DUS_user/php/facility.php");</script>';
+                      echo '<script> window.location.href="index.php";</script>';
                       }
                     }
                 }else
