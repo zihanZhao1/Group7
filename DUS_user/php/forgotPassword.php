@@ -1,16 +1,18 @@
 <?php
   include_once "head_user.php";
   use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
+
   require_once "functions.php";
 
-  var_dump($_POST);
-  if(isset($_POST['reset'])){
+
+  if(isset($_POST['email'])){
     require"conn.php";
 
 
     $email=$_POST['email'];
 
-    var_dump($_POST);
+    //var_dump($_POST);
     $sql="SELECT U_ID FROM SEI_User WHERE email='$email'";
     $query=$pdo->query($sql);
 
@@ -29,15 +31,30 @@
 
       require '../phpmailer/vendor/autoload.php';
 
+      $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
-      $mail->setFrom('chenchang1995.96@gmail.com', 'Durham Sport Team');
-      $mail->addAddress($email);
-      $mail->Subject = 'Reset Password';
-      $mail->isHTML(true);
-      $mail->Body    = "
-            Please click on the link below to reset your password:<br><br>
+          //Server settings
 
-            <a href='http://localhost/Facility/resetPassword.php?email=$email&token=$token'>Click here</a>http://localhost/Facility/resetPassword.php?email=$email&token=$token
+
+          $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+          $mail->isSMTP();                                      // Set mailer to use SMTP
+          $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+          $mail->SMTPAuth = true;                               // Enable SMTP authentication
+          $mail->Username = 'durhamsportteam@gmail.com';                 // SMTP username
+          $mail->Password = 'qwer6666';                           // SMTP password
+          $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+          $mail->Port = 587;                                    // TCP port to connect to
+
+
+
+          $mail->setFrom('durhamsportteam@gmail.com', 'Durham Sport Team');
+          $mail->addAddress($email);
+          $mail->Subject = 'Reset Password';
+          $mail->isHTML(true);
+          $mail->Body    = "
+            Please click on the link below to reset your password (The link will expire in 5 minutes.):<br><br>
+
+            <a href='resetPassword.php?email=$email&token=$token'>Click here:</a><br>http://localhost/Group7/DUS_user/php/resetPassword.php?email=$email&token=$token
             ";
       if ($mail->send())
           exit (json_encode(array('status' =>1 , "msg"=>"Verification needed. We'll send a code to your email to verify your identity. Please check your Email Inbox!")));
@@ -66,14 +83,15 @@
         <br>
         <br>
 
-  <form action="login.php"  method="post">
+  <form action="login.php" onsubmit="alert('Please check your inbox and verify your email address!')" method="post">
           <h1 style="color:#742e68;">Reset Password</h1>
           <hr>
         <p align="left"><font color="red">*</font><b>Please Enter Your Emaill Address:</b>
         </p>
         <input class="form-control" id="email" placeholder="Email Address..." required><br>
         <br><br>
-        <input type="button" class="btn btn-primary" value="Reset Password" id="reset"><p id="response"></p>
+        <input type="submit" class="btn btn-primary" value="Reset Password" id="reset">
+        <p id="response"></p>
         <br><br>
 
       </form>
