@@ -4,7 +4,7 @@
 </head>
 <?php
 include 'conn.php';
-require_once 'head_user.php';
+require_once 'head.php';
 ?>
 <body class="home">
 <div class="container-fluid">
