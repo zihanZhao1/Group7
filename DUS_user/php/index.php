@@ -9,7 +9,7 @@
     <?php
     include 'conn.php';
     include 'facility.php';
-    require_once 'head_user.php';
+    require_once 'head.php';
     ?>
     <div id="content" class="row-fluid">
         <div class="span3 pages">
