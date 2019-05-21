@@ -1,3 +1,8 @@
+<?php
+
+include_once "head.php";
+ ?>
+
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -46,7 +51,7 @@
             </div>
         <div id="content" class="row-fluid" style="height: auto">
             <div class="span2 main">
-                <p style="font-size:15px;">Welcome Trainer....</p>
+                <p style="font-size:15px;">Welcome Trainer <?php echo $_SESSION["userId"] ?></p>
                 <ul>
                     <li class='navcurrent'><a href="#"> List of Courses</a></li>
                 </ul>
