@@ -1,9 +1,8 @@
 <?php
-  include_once "head.php";
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
 
-  require_once "functions.php";
+  //require_once "functions.php";
 
 
   if(isset($_POST['email'])){
@@ -13,7 +12,7 @@
     $email=$_POST['email'];
 
     //var_dump($_POST);
-    $sql="SELECT U_ID FROM SEI_User WHERE email='$email'";
+    $sql="SELECT U_ID FROM sei_user WHERE email='$email'";
     $query=$pdo->query($sql);
 
     $num_rows=$query->rowCount();
@@ -22,7 +21,7 @@
 
     	$token=generateNewString();
 
-	    $pdo->query("UPDATE SEI_User SET token='$token', tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email='$email'" );
+	    $pdo->query("UPDATE sei_user SET token='$token', tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email='$email'" );
 
       /*
       require_once "phpmailer/phpmailer.php";
@@ -72,64 +71,77 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Forgot Password System</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Forgot Password System</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/team-durham.css" type="text/css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-  <div class="container" style="margin-top:100px;">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-md-offset-3" align="center">
-        <br>
-        <br>
-
-  <form action="login.php" onsubmit="alert('Please check your inbox and verify your email address!')" method="post">
-          <h1 style="color:#742e68;">Reset Password</h1>
-          <hr>
-        <p align="left"><font color="red">*</font><b>Please Enter Your Emaill Address:</b>
-        </p>
-        <input class="form-control" id="email" placeholder="Email Address..." required><br>
-        <br><br>
-        <input type="submit" class="btn btn-primary" value="Reset Password" id="reset">
-        <p id="response"></p>
-        <br><br>
-
-      </form>
-
-
-      </div>
+    <div class="container" style="margin-top:50px;">
+        <?php include("head.php"); ?>
+        <div class="row justify-content-center">
+        <div class="col-md-6 col-md-offset-3" align="center">
+            <br>
+            <form action="login.php" onsubmit="alert('Please check your inbox and verify your email address!')" method="post">
+                <h1 style="color:#742e68;">Reset Password</h1>
+                <hr>
+                <p align="left"><font color="red">*</font><b>Please Enter Your Emaill Address:</b>
+                </p>
+                <input class="form-control" id="email" placeholder="Email Address..." required><br>
+                <br><br>
+                <input type="submit" class="btn btn-primary" value="Reset Password" id="reset">
+                <p id="response"></p>
+                <br><br>
+            </form>
+            </div>
+        </div>
     </div>
-   </div>
+    <?php include("foot.php");?>
+    <script type="text/javascript">
+        var email = $("#email");
 
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-   <script type="text/javascript">
-    var email = $("#email");
+        $(document).ready(function (){
+          $('.btn-primary').on('click',function(){
+            if(email.val()!= ""){
+               email.css('border','1px solid green');
 
-    $(document).ready(function (){
-      $('.btn-primary').on('click',function(){
-        if(email.val()!= ""){
-           email.css('border','1px solid green');
+              $.ajax({
+                url:'forgotPassword.php',
+                method:'POST',
+                dataType:'json',
+                data:{
+                  email:email.val()
+                },success: function (response){
+                  if(!response.success)
+                     $("#response").html(response.msg).css('color',"red");
+                  else {
+                     $("#response").html(response.msg).css('color',"green");
+                  }
+                }
 
-          $.ajax({
-            url:'forgotPassword.php',
-            method:'POST',
-            dataType:'json',
-            data:{
-              email:email.val()
-            },success: function (response){
-              if(!response.success)
-                 $("#response").html(response.msg).css('color',"red");
-              else {
-                 $("#response").html(response.msg).css('color',"green");
-              }
+              });
+            }else {
+              email.css('border','1px solid red');
             }
-
           });
-        }else {
-          email.css('border','1px solid red');
-        }
-      });
-    });
+        });
+        <?php logoutBlock(); ?>
     </script>
 </body>
 </html>

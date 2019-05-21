@@ -1,5 +1,5 @@
 <?php
-    include("connection.php");
+    include("conn.php");
 
     function getDateForSpecificDayBetweenDates($startDate,$endDate,$day_number){
         $endDate = strtotime($endDate);
@@ -52,7 +52,6 @@
                 $output['f'] = $row['F_ID'];
                 $output['sd'] = $row['start_date'];
                 $output['ed'] = $row['end_date'];
-                $output['wd'] = $row['week'];
                 $output['st'] = $row['start_time'];
                 $output['et'] = $row['end_time'];
             }

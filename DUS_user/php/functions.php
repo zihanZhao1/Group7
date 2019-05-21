@@ -1,12 +1,22 @@
 
 <?php
+  function logoutBlock(){
+    if(isset($_SESSION["userName"])){
+      echo 'document.getElementById("login").style.display="none";';
+      echo 'document.getElementById("register").style.display="none";';
+      echo 'document.getElementById("logout").style.display="block";';
+      echo 'document.getElementById("myAccount").style.display="block";';
+
+    }
+  }
+
 
   function generateNewString($len=10){
     $token="fjslgjfJALKNLJKFDNL129";
-    $token=str_shuffle($token);
-    $token=substr($token,0,$len);
+    $token1=str_shuffle($token);
+    $token2=substr($token1,0,$len);
 
-    return $token;
+    return $token2;
   }
 
   function redirectToLoginPage(){

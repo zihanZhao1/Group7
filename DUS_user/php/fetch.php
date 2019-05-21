@@ -1,5 +1,6 @@
 <?php
-    include("connection.php");
+    include("conn.php");
+    session_start();
     $query = "select * from sei_course";
     $statement = $pdo->prepare($query);
     $statement->execute();
@@ -35,14 +36,21 @@
                 <td>'.$row["end_date"].'</td>
                 <td>'.$row["start_time"].'</td>
                 <td>'.$row["end_time"].'</td>
-                <td>
-                    <button type="button" name="edit" class="btn btn-info btn-xs edit" id="'.$row["C_ID"].'">Edit</button>
-                </td>
-                <td>
-                    <button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["C_ID"].'">Delete</button>
-                </td>
-            </tr>
-            ';
+                <td>'; 
+                   
+                   if($_SESSION["role"] == "trainer"){
+                        $output.= '<button type="button" name="edit" class="btn btn-info btn-xs edit" id="'.$row["C_ID"].'">Edit</button>';
+                    }else{
+                        $output.= "This is available for trainers";
+                    }
+                $output.='</td>
+                <td>';
+                    if($_SESSION["role"] == "trainer"){
+                        $output.= '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["C_ID"].'">Delete</button>';
+                    }else{
+                        $output.= "This is available for trainers";
+                    }
+            $output.='</td></tr>';
         }
     }else{
         $output .= '

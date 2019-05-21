@@ -116,3 +116,4 @@ if ($insert) {
     $message = "Fail to book!";
 //    echo "<script>alert('$message');window.location.href='booking.php';</script>";
 }
+?>

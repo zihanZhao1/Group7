@@ -34,3 +34,4 @@ foreach ($booking as $b) {
 $tmpBooking = json_encode($tmpBooking);
 
 echo "var allBooking = $tmpBooking";
+?>

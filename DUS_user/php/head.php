@@ -1,34 +1,8 @@
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Our Facilities - Durham University</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-
 <?php
 session_start();
 require "functions.php";
 ?>
 
-<body class="home">
-<!--  -->
-<!--  -->
 <div class="container-fluid">
     <div id="header" class="row-fluid">
         <div class="span12">
@@ -48,8 +22,8 @@ require "functions.php";
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" style="color:#742e68;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color:#742e68;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user-circle" aria-hidden="false" style="font-size: 34px; color:#742e68;"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,10 +32,9 @@ require "functions.php";
             <a class="dropdown-item" id="logout" style="display:none;" href="logout.php">Log
                 Out</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" id="logout" href="account.php">My Account</a>
+            <a class="dropdown-item" id="myAccount" style="display:none;" href="account.php">My Account</a>
         </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -74,21 +47,20 @@ require "functions.php";
                     <a class="nav-link" href="events.html">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="course.html">Courses</a>
+                    <a class="nav-link" href="course.php">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="help.html">Help</a>
+                    <a class="nav-link" href="help.php">Help</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">About Us</a>
+                    <a class="nav-link" href="aboutus.php">About Us</a>
                 </li>
             </ul>
-
-            <form method="post" action="search.php" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search"
+            <form method="post" action="search.php" onsubmit="return checkSearch();" class="form-inline my-2 my-lg-0">
+                <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search"
                        style="height: 35px; border-radius:5px; margin-top: 4px;" name="search">
 
-                <select name="column" class="custom-select"
+                <select id="column" name="column" class="custom-select"
                         style="border-radius: 5px;margin-top:5px;font-size:12px; height:35px">
                     <option value="select">Select Filter</option>
                     <option value="title">Title</option>
@@ -103,14 +75,22 @@ require "functions.php";
             </form>
         </div>
     </nav>
-</div>
 <script>
+  function checkSearch(){
+    if($("#search").val()==""){
+      alert("please enter inputs.");
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
     <?php
+    var_dump($_SESSION);
     if (isset($_SESSION["userName"])) {
-        echo 'document.getElementById("login").style.display="none";';
-        echo 'document.getElementById("logout").style.display="block";';
+      echo 'document.getElementById("login").style.display="none";';
+      echo 'document.getElementById("register").style.display="none";';
+      echo 'document.getElementById("logout").style.display="block";';
     }
     ?>
 </script>
-</body>
-</html>

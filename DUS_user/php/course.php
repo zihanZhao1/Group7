@@ -1,57 +1,29 @@
-<?php
-
-include_once "head.php";
- ?>
 
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Course Management - Durham University</title>
+        <link rel="stylesheet" href="../css/index.css" type="text/css" />
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css" />
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/jquery-ui.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="css/index.css" type="text/css" />
-        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
 
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
+      <?php include("head.php"); ?>
 	<div class="container-fluid">
-            <div id="header" class="row-fluid">
-                <div class="span12">
-                  <h1>
-                      <a href="/" class="pull-right">
-                        <img width="140" src="img/durham-university-logo-white.png" alt="Durham University" class="durham-university-logo">
-                      </a>
-                      <a href="/" class="pull-left">
-                          <img src="img/teamdurham.png" alt="Team Durham" class="team-durham-logo" />
-                      </a>
-                      <a href="/" class="team-durham-slogan">
-                          <span class="light">Durham University</span><br/>Sport<br/><br/>
-                          <span class="slogan">Enabling Exceptional People to do Exceptional Things</span>
-                      </a>
-                    </h1>
-                </div>
-            </div>
-            <div id="navigation" class="row-fluid">
-                <div class="span12">
-                    <ul class="nav nav-pills">
-                        <li><a href="#0">Home</a></li>
-                        <li><a href="facility.php">Facilities</a></li>
-                        <li class="active"><a href="#">Courses</a></li>
-                        <li><a href="#3">Calendar</a></li>
-                        <li><a href="#4">Help</a></li>
-                        <li><a href="#5">About Us</a></li>
-                    </ul>
-                </div>
-            </div>
         <div id="content" class="row-fluid" style="height: auto">
             <div class="span2 main">
-                <p style="font-size:15px;">Welcome Trainer <?php echo $_SESSION["userId"] ?></p>
+                <p style="font-size:15px;">Welcome Trainer <?php echo $_SESSION["name"]; ?></p>
                 <ul>
                     <li class='navcurrent'><a href="#"> List of Courses</a></li>
                 </ul>
@@ -60,8 +32,13 @@ include_once "head.php";
             <div class="span10 extra">
                 <div class="container" style="width:auto">
                     <p><br></p>
-                    <div style="margin-bottom:5px;">
-                        <button type="button" name="add" id="add" class="btn btn-primary btn-xs" style="margin-left: 20px;">Add New Course</button>
+                    <div id="changeBox" style="margin-bottom:5px;">
+                        <?php
+                        if($_SESSION["role"]=="trainer"){
+                            echo '<button type="button" name="add" id="add" class="btn btn-primary btn-xs" style="margin-left: 20px;">Add New Course</button>';
+                        }else{
+                            echo "This button is for trainer";
+                        }?>
                     </div>
                     <div id="course_data" class="table-responsive" >
 
@@ -82,8 +59,8 @@ include_once "head.php";
                         <div class="form-group">
                             <label>Select Facility</label>
                             <?php
-                            include("connection.php");
-                            $result = $pdo->query("select F_ID, name, room from sei_facility");
+                            include("conn.php");
+                            $result = $pdo->query("select F_ID, name from sei_facility");
 
                             echo " <select name='f' id='f' style='margin-left: 20px;'>";
 
@@ -91,9 +68,9 @@ include_once "head.php";
                                 unset($fid, $fname,$rn);
                                 $fid = $row['F_ID'];
                                 $fname = $row['name'];
-                                $rn = $row['room'];
+                                //$rn = $row['room'];
                                 echo '<option style="display:none;"></option>';
-                                echo '<option value="'.$fid.'">'.$fid.','.$fname.' '.$rn.'</option>';
+                                echo '<option value="'.$fid.'">'.$fid.','.$fname.' </option>';
                             }
                             echo "</select>";
                             ?><br>
@@ -149,17 +126,8 @@ include_once "head.php";
                 <p>Are you sure you want to Delete this data?</p>
             </div>
         </div>
-        <div class="container-fluid no-border">
-            <div id="footer" class="row-fluid">
-                <div class="span12">
-
-                </div>
-            </div>
+        <?php include("foot.php"); ?>
         </div>
-        </div>
-    </body>
-</html>
-
 <script>
     $(document).ready(function(){
 
@@ -342,7 +310,6 @@ include_once "head.php";
                     $('#f').val(data.f);
                     $('#sd').val(data.sd);
                     $('#ed').val(data.ed);
-                    $('#wd').val(data.wd);
                     $('#st').val(data.st);
                     $('#et').val(data.et);
                     $('#course_dialog').attr('title','Edit Course');
@@ -396,6 +363,11 @@ include_once "head.php";
                 $("#sd").attr("min",year+"-"+month+"-"+date);
                 $("#ed").attr("min",year+"-"+month+"-"+date);
     });
+    
 
+    <?php logoutBlock(); ?>
 
 </script>
+
+</body>
+</html>
