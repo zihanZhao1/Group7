@@ -1,5 +1,5 @@
 <?php
-  include_once "head_user.php";
+  include_once "head.php";
   require_once "functions.php";
   require "conn.php";
 $msg = "";
