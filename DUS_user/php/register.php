@@ -53,13 +53,13 @@ $msg = "";
                     $mail->isSMTP();                                      // Set mailer to use SMTP
                     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                    $mail->Username = 'chenchang1995.96@gmail.com';                 // SMTP username
-                    $mail->Password = '19950906';                           // SMTP password
+                    $mail->Username = 'durhamsportteam@gmail.com';                 // SMTP username
+                    $mail->Password = 'qwer6666';                           // SMTP password
                     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 587;                                    // TCP port to connect to
 
                     //Recipients
-                    $mail->setFrom('chenchang1995.96@gmail.com', 'Durham Sport Team');
+                    $mail->setFrom('durhamsportteam@gmail.com', 'Durham Sport Team');
                     $mail->addAddress($email, $name);   // Add a recipient
 
                     //Content
