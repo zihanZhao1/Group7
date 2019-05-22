@@ -18,6 +18,7 @@
             $arr = getDateForSpecificDayBetweenDates($_POST["sd"],$_POST["ed"],$_POST["wd"]);
             if($arr == null){
                 echo "<script>alert('There is no such weekday between the dates you choose');</script>";
+                echo "<meta http-equiv='refresh' content='0'>";
             }else{
                 $query="insert into sei_course(C_ID,name,F_ID,start_date,end_date,start_time,end_time,week) values('".$_POST["cid"]."','".$_POST["cn"]."','".$_POST["f"]."','".$_POST["sd"]."','".$_POST["ed"]."','".$_POST["st"]."','".$_POST["et"]."','".$_POST["wd"]."')";
                 $statement = $pdo->prepare($query);
@@ -63,9 +64,9 @@
         if($_POST["action"] == "update"){
             
             $arr = getDateForSpecificDayBetweenDates($_POST["sd"],$_POST["ed"],$_POST["wd"]);
-            
             if($arr == null){
                 echo "<script>alert('There is no such weekday between the dates you choose');</script>";
+                echo "<meta http-equiv='refresh' content='0'>";
             }else{
                 $query = "UPDATE sei_course SET name = '".$_POST["cn"]."',F_ID = '".$_POST["f"]."',start_date = '".$_POST["sd"]."',end_date = '".$_POST["ed"]."',start_time = '".$_POST["st"]."', end_time = '".$_POST["et"]."', week = '".$_POST["wd"]."' WHERE C_ID = '".$_POST["hidden_id"]."'";
                 $statement = $pdo->prepare($query);
