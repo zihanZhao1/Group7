@@ -79,7 +79,7 @@
                     $statement2 = $pdo->prepare($query2);
                     $statement2->execute();
                 }else{
-                    $fnum = $conn->query("select capability from sei_facility where F_ID = '".$_POST["f"]."' ")->fetch(PDO::FETCH_ASSOC);
+                    $fnum = $pdo->query("select capability from sei_facility where F_ID = '".$_POST["f"]."' ")->fetch(PDO::FETCH_ASSOC);
                     $num = implode("",$fnum);
                     $query3 = "insert into sei_booking (U_ID,F_ID,C_ID,start,end,count,avb) values('007','".$_POST["f"]."', '".$_POST["hidden_id"]."','$start_datetime','$end_datetime','$num','Yes')";
                     $statement3 = $pdo->prepare($query3);
