@@ -56,9 +56,7 @@ include("conn.php");
                     data: num,
                     method: 'get',
                     success: function (data) {
-
                         $('.content').html(data);
-
                     },
                     fail: function fail() {
                         alert("Failed")
@@ -94,19 +92,8 @@ include("conn.php");
                 $f = $statement->fetch(PDO::FETCH_ASSOC);
                 $fname = $f['name'];
                 $maxCap = $f['capability'];
-                echo "<h3>Booking $fname</h3>";
+                echo "<h3>Booking $fname</h3><br>";
                 ?>
-
-                <form class="booking_form">
-                    <select name="id">
-                        <option value="0">View All</option>
-                        <option value="1123">Squash Courts</option>
-                        <option value="1124">Aerobics Room</option>
-                        <option value="1125">Tennis</option>
-                        <option value="1126">Athletics Track</option>
-                    </select>
-                    <input class="btn btn-primary" type="submit" value="View My Bookings">
-                </form>
 
                 <form class="date_form">
                     <h4>Date: </h4>
@@ -117,7 +104,7 @@ include("conn.php");
                 <form class="num_form" name="f">
                     <h4>Place for:(how many people)</h4>
                     <input type="number" id="num" name="num"><br>
-                    <input type="submit" value="Confirm" class="btn btn-primary"><br>
+                    <input type="submit" value="Confirm" class="btn btn-primary">
                 </form>
             </div>
         </div>
@@ -130,6 +117,18 @@ include("conn.php");
                             <div class="box">
                                 <div class="box-head">
                                     <h2>My Bookings</h2>
+
+                                    <form class="booking_form">
+                                        <select name="id">
+                                            <option value="0">View All</option>
+                                            <option value="1123">Squash Courts</option>
+                                            <option value="1124">Aerobics Room</option>
+                                            <option value="1125">Tennis</option>
+                                            <option value="1126">Athletics Track</option>
+                                        </select>
+                                        <input class="btn btn-primary" type="submit" value="View My Bookings">
+                                    </form>
+
                                 </div>
                                 <div class="box-content box-nomargin">
                                     <div class="calendar"></div>
@@ -172,7 +171,39 @@ include("conn.php");
     </div>
 </div>
 <?php require_once 'foot.php' ?>
+<script>
+    $(document).ready(function(){
+        $('#d').on('submit',function(event){
+            event.preventDefault();
+            var error_d = '';
 
+            if($('#date').val()==''){
+                error_d = 'Date is required';
+                $('#error_d').text(error_d);
+                $('#date').css('border-color','#cc0000');
+            }else{
+                error_d = '';
+                $('#error_d').text(error_d);
+                $('#date').css('border-color','');
+            }
+        });
+
+        $('#f').on('submit',function(event){
+            event.preventDefault();
+            var error_n = '';
+
+            if($('#num').val()==''){
+                error_n = 'Number of players is required';
+                $('#error_n').text(error_n);
+                $('#num').css('border-color','#cc0000');
+            }else{
+                error_n = '';
+                $('#error_n').text(error_n);
+                $('#num').css('border-color','');
+            }
+        });
+    });
+</script>
 <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../js/fullcalendar.min.js"></script>
 <script src="conn_calendar.php"></script>

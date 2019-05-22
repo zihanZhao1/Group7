@@ -23,7 +23,7 @@ class facility
                             <p>$info</p> <br/>
                     </div>
                     <div class=\"span3 \">
-                    <button class='btn btn-primary'><a  style='color: white' href='booking.php?id=$ID'>Book now</a></button>
+                    <button class='btn btn-primary'><a  style='color: white' href='booking.php?id=$ID'>Book now</a></button><br>
                    </div>
                </div>";
     }

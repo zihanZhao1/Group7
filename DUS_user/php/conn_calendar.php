@@ -8,7 +8,7 @@
 
 include 'conn.php';
 session_start();
-$Uid = $_SESSION['user'];
+$Uid = $_SESSION['userId'];
 //$Uid = 1;
 
 $tmpBooking = array();
