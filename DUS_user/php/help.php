@@ -19,6 +19,18 @@
                 crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            .carousel-control-prev-icon {
+                background-image: url("../img/arrow-left-24.ico");
+            }
+
+            .carousel-control-next-icon {
+                background-image: url("../img/arrow-right-24.ico");
+            }
+            .carousel-indicators .active{
+                background-color: purple;
+            }
+        </style>
     </head>
     <body class="home"> 
         <div class="container-fluid">
@@ -38,6 +50,10 @@
                                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                                 <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                                 <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                                <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+                                <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
+                                <li data-target="#carouselExampleCaptions" data-slide-to="6"></li>
+                                <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
                             </ol>
                             <div class="carousel-inner" role="listbox" style=" width:100%; height: 700px !important;">
                                 <div class="carousel-item active">
