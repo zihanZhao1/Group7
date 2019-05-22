@@ -56,7 +56,7 @@
                     <form method="post" id="course_form">
                          <div class="form-group">
                             <label>Enter Course ID</label>
-                            <input type="text" name="cid" id="cid" class="form-control" />
+                            <input type="text" name="cid" id="cid" class="form-control" placeholder="No duplicate ID number allowed" />
                             <span id="error_cid" class="text-danger"></span>
                         </div>
                         <div class="form-group">
