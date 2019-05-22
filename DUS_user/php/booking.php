@@ -126,7 +126,7 @@ include("conn.php");
                                             <option value="1125">Tennis</option>
                                             <option value="1126">Athletics Track</option>
                                         </select>
-                                        <input class="btn btn-primary" type="submit" value="View My Bookings">
+                                        <input class="btn btn-primary" type="submit" value="Change Facility">
                                     </form>
 
                                 </div>

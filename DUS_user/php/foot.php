@@ -55,6 +55,7 @@
                     '//www.googletagmanager.com/gtm.js?id=' + i + dl;
                 f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-W9Q3S4');</script>
+            <script><?php logoutBlock(); ?></script>
         </div>
     </div>
 </div>
