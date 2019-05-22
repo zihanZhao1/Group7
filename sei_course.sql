@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2019 at 03:59 PM
+-- Generation Time: May 22, 2019 at 05:31 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -35,15 +35,16 @@ CREATE TABLE `sei_course` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `start_time` time NOT NULL,
-  `end_time` time NOT NULL
+  `end_time` time NOT NULL,
+  `week` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `sei_course`
 --
 
-INSERT INTO `sei_course` (`C_ID`, `name`, `F_ID`, `start_date`, `end_date`, `start_time`, `end_time`) VALUES
-(10001, 'Tennis', 1125, '2019-05-17', '2019-05-30', '10:00:00', '12:00:00');
+INSERT INTO `sei_course` (`C_ID`, `name`, `F_ID`, `start_date`, `end_date`, `start_time`, `end_time`, `week`) VALUES
+(10002, 'Basket', 1124, '2019-06-01', '2019-06-28', '12:00:00', '14:00:00', 4);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +64,7 @@ ALTER TABLE `sei_course`
 -- AUTO_INCREMENT for table `sei_course`
 --
 ALTER TABLE `sei_course`
-  MODIFY `C_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
+  MODIFY `C_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10003;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
