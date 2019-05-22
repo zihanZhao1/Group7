@@ -49,10 +49,6 @@
             }
           }
         }
-
-
-
-
   ?>
 
 <!doctype html>
@@ -106,7 +102,6 @@
             </div>
         </div>
     </div>
-
 
 <script>
 <?php
