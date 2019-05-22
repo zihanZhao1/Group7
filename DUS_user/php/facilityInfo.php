@@ -32,8 +32,9 @@
                 <div class="span10">
                     <?php 
                     include "conn.php";
-                    $row = $pdo->query("select F_ID,capability,info,price from sei_facility where name = 'Squash Court'")->fetch(PDO::FETCH_ASSOC);
-                    $fid = $row['F_ID'];
+                    $id = $_GET['id'];
+                    $row = $pdo->query("select name,capability,info,price from sei_facility where F_ID = $id")->fetch(PDO::FETCH_ASSOC);
+                    $fname = $row['name'];
                     $cap = $row['capability'];
                     $price = $row['price'];
                     $intro = $row['info'];
@@ -42,7 +43,7 @@
                         <tbody>
                             <tr>
                               <th scope="row">Facility ID</th>
-                              <td><?php echo $fid; ?></td>
+                              <td><?php echo $id; ?></td>
                             </tr>
                             <tr>
                               <th scope="row">Capacity</th>
@@ -53,7 +54,7 @@
                               <td><?php echo $price; ?></td>
                             </tr>
                             <tr>
-                              <th scope="row">Breif Introduction</th>
+                              <th scope="row">Brief Introduction</th>
                               <td><?php echo $intro; ?></td>
                             </tr>
                         </tbody>

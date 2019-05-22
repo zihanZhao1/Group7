@@ -14,7 +14,7 @@ class facility
         echo " <div class=\"row-fluid\">
                   <div class=\"span3 \">
                        <div class=\"box-heading\">
-                            <img src=\"../img/$name.jpg\" title=\"\" alt=\"\" height='136' width='187'/>
+                            <a href='facilityInfo.php?id=$ID'><img src=\"../img/$name.jpg\" title=\"\" alt=\"\" height='136' width='187'/></a>
                         </div><br/>
                    </div>
                    <div class=\"span6 \">
