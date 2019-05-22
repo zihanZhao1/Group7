@@ -13,7 +13,6 @@ include("conn.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../css/team-durham.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
                 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -73,7 +72,7 @@ include("conn.php");
 <body class="home">
 <div class="container-fluid">
     <?php require_once 'head.php';
-    if ($_SESSION['username'] = null) {
+    if (!isset($_SESSION['userId'])) {
         echo "<script> alert('Please login'),window.location.href='login.php'</script>";
     }
     ?>
@@ -143,7 +142,7 @@ include("conn.php");
         </div>
     </div>
     <div>
-        <h3 align="center">Your bookings</h3>
+        <h3 align="center">Your bookings record</h3>
         <table border="1" width="100%" cellpadding="10" cellspacing="10">
             <tr>
                 <td>Facility</td>
@@ -153,11 +152,11 @@ include("conn.php");
                 <td>Delete</td>
             </tr>
             <?php
-            $user = $_SESSION['username'];
+            $user = $_SESSION['userId'];
             //            $user = 1;
             $res = $pdo->query("SELECT  `B_ID` ,  `start` ,  `end` ,  `count` , sei_facility.name
             FROM  `sei_booking` , sei_facility
-            WHERE sei_booking.U_ID =1
+            WHERE sei_booking.U_ID =$user
             AND sei_facility.F_ID = sei_booking.F_ID;");
             foreach ($res as $row) {
                 echo "<tr>";
