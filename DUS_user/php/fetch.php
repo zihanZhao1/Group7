@@ -16,6 +16,7 @@
         <th>End Date</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Week(1-7:Mon-Sun)</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -36,6 +37,7 @@
                 <td>'.$row["end_date"].'</td>
                 <td>'.$row["start_time"].'</td>
                 <td>'.$row["end_time"].'</td>
+                <td>'.$row["week"].'</td>
                 <td>'; 
                    
                    if(!isset($_SESSION["role"]) || $_SESSION["role"]==""){
