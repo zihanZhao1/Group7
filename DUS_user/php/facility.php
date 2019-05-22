@@ -8,7 +8,8 @@
 
 class facility
 {
-    function facility($ID,$name, $info){
+    function facility($ID, $name, $info)
+    {
 
         echo " <div class=\"row-fluid\">
                   <div class=\"span3 \">
@@ -22,7 +23,7 @@ class facility
                             <p>$info</p> <br/>
                     </div>
                     <div class=\"span3 \">
-                            <h3><input type='button' class='btn btn-primary' onclick='location.href='booking.php?id=$ID';' value='Book Now'/></h3><br/>
+                    <button class='btn btn-primary'><a  style='color: white' href='booking.php?id=$ID'>Book now</a></button>
                    </div>
                </div>";
     }
