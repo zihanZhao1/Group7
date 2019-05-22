@@ -23,7 +23,7 @@
 	<div class="container-fluid">
         <div id="content" class="row-fluid" style="height: auto">
             <div class="span2 main">
-                <p style="font-size:15px;">Welcome Trainer <?php echo $_SESSION["name"]; ?></p>
+                <p style="font-size:15px;">Welcome <?php echo $_SESSION["name"]; ?></p>
                 <ul>
                     <li class='navcurrent'><a href="#"> List of Courses</a></li>
                 </ul>
@@ -36,8 +36,10 @@
                         <?php
                         if($_SESSION["role"]=="trainer"){
                             echo '<button type="button" name="add" id="add" class="btn btn-primary btn-xs" style="margin-left: 20px;">Add New Course</button>';
-                        }else{
-                            echo "This button is for trainer";
+                        }elseif($_SESSION["role"]==""){
+                            echo "";
+                        }elseif($_SESSION["role"]==""){
+                            echo "";
                         }?>
                     </div>
                     <div id="course_data" class="table-responsive" >
