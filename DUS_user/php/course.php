@@ -48,82 +48,8 @@ include("head.php"); ?>
                         }
                     } ?>
                 </div>
-<<<<<<< Updated upstream
-                <div id="course_dialog" title="Add New Course">
-                    <form method="post" id="course_form">
-                         <div class="form-group">
-                            <label>Enter Course ID</label>
-                            <input type="text" name="cid" id="cid" class="form-control" placeholder="No duplicate ID number allowed" />
-                            <span id="error_cid" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter Course Name</label>
-                            <input type="text" name="cn" id="cn" class="form-control" />
-                            <span id="error_cn" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Select Facility</label>
-                            <?php
-                            $result = $pdo->query("select F_ID, name from sei_facility");
-
-                            echo " <select name='f' id='f' style='margin-left: 20px;'>";
-
-                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                unset($fid, $fname,$rn);
-                                $fid = $row['F_ID'];
-                                $fname = $row['name'];
-                                //$rn = $row['room'];
-                                echo '<option style="display:none;"></option>';
-                                echo '<option value="'.$fid.'">'.$fid.','.$fname.' </option>';
-                            }
-                            echo "</select>";
-                            ?><br>
-                            <span id="error_f" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter Start Date</label>
-                            <input type="date" name="sd" id="sd" class="form-control" min="<?=date('Y-m-d', strtotime('+1 days'))?>" max="<?=date('Y-m-d', strtotime('+180 days')) ?>"/>
-                            <span id="error_sd" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter End Date</label>
-                            <input type="date" name="ed" id="ed" class="form-control" min="<?=date('Y-m-d', strtotime('+1 days'))?>" max="<?=date('Y-m-d', strtotime('+180 days')) ?>"/>
-                            <span id="error_ed" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter Specific Week Day </label>
-                            <select name="wd" id="wd">
-                                <option style="display:none;"></option>
-                                <option value="1">Mon</option>
-                                <option value="2">Tue</option>
-                                <option value="3">Wed</option>
-                                <option value="4">Thu</option>
-                                <option value="5">Fri</option>
-                                <option value="6">Sat</option>
-                                <option value="7">Sun</option>
-                            </select>
-                            <span id="error_wd" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter Start Time</label>
-                            <input type="time" name="st" id="st" class="form-control" />
-                            <span id="error_st" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Enter End Time</label>
-                            <input type="time" name="et" id="et" class="form-control" />
-                            <span id="error_et" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="action" id="action" value="insert" />
-                            <input type="hidden" name="hidden_id" id="hidden_id" />
-                            <input type="submit" name="form_action" id="form_action" class="btn btn-primary" value="Insert" />
-                        </div>
-                    </form>
-=======
                 <div id="course_data" class="table-responsive">
 
->>>>>>> Stashed changes
                 </div>
             </div>
             <div id="course_dialog" title="Add New Course">
@@ -448,6 +374,7 @@ include("head.php"); ?>
         $("#sd").attr("min", year + "-" + month + "-" + date);
         $("#ed").attr("min", year + "-" + month + "-" + date);
     });
+
 
     <?php logoutBlock(); ?>
 
