@@ -22,9 +22,7 @@ class facility
                             <p>$info</p> <br/>
                     </div>
                     <div class=\"span3 \">
-                       <div class=\"box - heading\">
-                            <h3><a href='booking.php?id=$ID'>Book now</a></h3>
-                        </div><br/>
+                            <h3><input type='button' class='btn btn-primary' onclick='location.href='booking.php?id=$ID';' value='Book Now'/></h3><br/>
                    </div>
                </div>";
     }
