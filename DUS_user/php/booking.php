@@ -120,11 +120,18 @@ include("conn.php");
 
                                     <form class="booking_form">
                                         <select name="id">
-                                            <option value="0">View All</option>
-                                            <option value="1123">Squash Courts</option>
-                                            <option value="1124">Aerobics Room</option>
-                                            <option value="1125">Tennis</option>
-                                            <option value="1126">Athletics Track</option>
+                                            <?php
+                                            $Farray = array('0'=>'View All','1123'=>'Squash Courts','1124'=>'Aerobics Room','1125'=>'Tennis','1126'=>'Athletics Track');
+                                            $tmpId = array_keys($Farray);
+                                            foreach ($tmpId as $t){
+                                                $tmpName = $Farray[$t];
+                                                if($t==$Fid){
+                                                    echo "<option value='$t' selected='selected'>$tmpName</option>";
+                                                }
+                                                else
+                                                    echo "<option value='$t'>$tmpName</option>";
+                                            }
+                                            ?>
                                         </select>
                                         <input class="btn btn-primary" type="submit" value="Change Facility">
                                     </form>
