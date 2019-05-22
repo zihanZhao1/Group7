@@ -7,7 +7,7 @@ include 'conn.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$uid = $_SESSION['username'];
+$uid = $_SESSION['userId'];
 //$uid = 1;
 $Fid = $_SESSION['facility'];
 $num = $_SESSION['num'];
