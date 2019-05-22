@@ -19,11 +19,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
-      <?php include("head.php"); ?>
+      <?php include("conn.php"); include("head.php"); ?>
 	<div class="container-fluid">
         <div id="content" class="row-fluid" style="height: auto">
             <div class="span2 main">
-                <p style="font-size:15px;">Welcome <?php echo $_SESSION["name"]; ?></p>
+                <p style="font-size:15px;">Welcome <?php if(!isset($_SESSION['name']) || $_SESSION['name'] == ''){
+                                                                echo "Guest";
+                                                            }else{
+                                                                echo $_SESSION["name"]; 
+                                                            } ?></p>
                 <ul>
                     <li class='navcurrent'><a href="#"> List of Courses</a></li>
                 </ul>
@@ -34,12 +38,14 @@
                     <p><br></p>
                     <div id="changeBox" style="margin-bottom:5px;">
                         <?php
-                        if($_SESSION["role"]=="trainer"){
-                            echo '<button type="button" name="add" id="add" class="btn btn-primary btn-xs" style="margin-left: 20px;">Add New Course</button>';
-                        }elseif($_SESSION["role"]==""){
-                            echo "";
-                        }elseif($_SESSION["role"]==""){
-                            echo "";
+                        if(!isset($_SESSION['role']) || $_SESSION['role'] == ''){
+                            echo "";    
+                        }elseif(isset($_SESSION["role"])){
+                           if($_SESSION["role"]=="trainer"){
+                                echo '<button type="button" name="add" id="add" class="btn btn-primary btn-xs" style="margin-left: 20px;">Add New Course</button>';
+                            }elseif($_SESSION["role"]=="user"){
+                                echo "";
+                            }
                         }?>
                     </div>
                     <div id="course_data" class="table-responsive" >
@@ -61,7 +67,6 @@
                         <div class="form-group">
                             <label>Select Facility</label>
                             <?php
-                            include("conn.php");
                             $result = $pdo->query("select F_ID, name from sei_facility");
 
                             echo " <select name='f' id='f' style='margin-left: 20px;'>";
@@ -80,12 +85,12 @@
                         </div>
                         <div class="form-group">
                             <label>Enter Start Date</label>
-                            <input type="date" name="sd" id="sd" class="form-control" />
+                            <input type="date" name="sd" id="sd" class="form-control" min="<?=date('Y-m-d', strtotime('+1 days'))?>" max="<?=date('Y-m-d', strtotime('+180 days')) ?>"/>
                             <span id="error_sd" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label>Enter End Date</label>
-                            <input type="date" name="ed" id="ed" class="form-control" />
+                            <input type="date" name="ed" id="ed" class="form-control" min="<?=date('Y-m-d', strtotime('+1 days'))?>" max="<?=date('Y-m-d', strtotime('+180 days')) ?>"/>
                             <span id="error_ed" class="text-danger"></span>
                         </div>
                         <div class="form-group">

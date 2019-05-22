@@ -38,18 +38,22 @@
                 <td>'.$row["end_time"].'</td>
                 <td>'; 
                    
-                   if($_SESSION["role"] == "trainer"){
-                        $output.= '<button type="button" name="edit" class="btn btn-info btn-xs edit" id="'.$row["C_ID"].'">Edit</button>';
-                    }else{
+                   if(!isset($_SESSION["role"]) || $_SESSION["role"]==""){
                         $output.= "This is available for trainers";
-                    }
+                    }elseif($_SESSION["role"] == "trainer"){
+                        $output.= '<button type="button" name="edit" class="btn btn-info btn-xs edit" id="'.$row["C_ID"].'">Edit</button>';
+                    }elseif($_SESSION["role"]=="user"){
+                        $output.= "This is available for trainers";
+                   }
                 $output.='</td>
                 <td>';
-                    if($_SESSION["role"] == "trainer"){
-                        $output.= '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["C_ID"].'">Delete</button>';
-                    }else{
+                    if(!isset($_SESSION["role"]) || $_SESSION["role"]=="" ){
                         $output.= "This is available for trainers";
-                    }
+                    }elseif($_SESSION["role"]=="trainer"){
+                        $output.= '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["C_ID"].'">Delete</button>';
+                    }elseif($_SESSION["role"]=="user"){
+                        $output.= "This is available for trainers";
+                   }
             $output.='</td></tr>';
         }
     }else{
