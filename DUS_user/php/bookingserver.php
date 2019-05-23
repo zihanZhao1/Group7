@@ -20,9 +20,6 @@ for ($i = 0; $i < count($_POST['bookTime']); $i++) {
 }
 asort($book);
 
-$b = $_POST['bookTime'];
-$btime= implode(',',$b);
-
 $start = array();
 array_push($start, $book[0]);
 for ($i = 1; $i < count($book); $i++) {
@@ -59,6 +56,9 @@ VALUES ($uid,$Fid,null,null,'$startDate','$endDate',$num,'yes')";
 }
 
 if ($insert) {
+    $b = $_POST['bookTime'];
+    $btime= implode(',',$b);
+    
     $row3 = $pdo->query("select name from sei_user where U_ID = '$uid'")->fetch(PDO::FETCH_ASSOC);
     $name = $row3['name'];
 
@@ -107,7 +107,7 @@ if ($insert) {
         $mail->Body = $body;
         $mail->AltBody = strip_tags($body);
         $mail->send();
-
+        echo "<script> alert('Successfully booked!'),window.location.href='booking.php?id=0'</script>";
     } catch (Exception $e) {
         $sql = "delete from sei_booking where B_ID = '$bid'";
         $pdo->exec($sql);

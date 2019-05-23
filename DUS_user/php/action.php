@@ -1,6 +1,9 @@
 <?php
     include("conn.php");
     session_start();
+    
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
     function getDateForSpecificDayBetweenDates($startDate,$endDate,$day_number){
         $endDate = strtotime($endDate);
@@ -105,6 +108,58 @@
             $statement1 = $pdo->prepare($query1);
             $statement1->execute();
             echo '<p>Data Deleted</p>';
+            
+            $row3 = $pdo->query("select name from sei_user where U_ID = '".$_SESSION["userId"]."'")->fetch(PDO::FETCH_ASSOC);
+            $name = $row3['name'];
+
+            $row4 = $pdo->query("select name from sei_course where C_ID = '".$_POST["id"]."'")->fetch(PDO::FETCH_ASSOC);
+            $cname = $row4['name'];
+
+            
+            require '../phpmailer/vendor/autoload.php';
+
+            $mail = new PHPMailer(true);
+            try {
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'gba78769df@gmail.com';
+                $mail->Password = 'mc081229snake';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+
+                $mail->setFrom('gba78769df@gmail.com', 'Ce Ma');
+                $mail->addAddress('gba78769df@gmail.com', 'Ce Ma');
+                $mail->addReplyTo('gba78769df@gmail.com', 'Ce Ma');
+
+                $body = '<html>
+                        <body>
+                        <h2>Course Canceled<h2>
+                        <hr>
+                        <p>Dear user:</p>
+                        <p>The course '.$cname.' has been canceled by '.$name.'!</p>
+                        </body>
+                        </html>';
+                //Content
+                $mail->isHTML(true);
+                $mail->Subject = 'DUS booking';
+                $mail->Body = $body;
+                $mail->AltBody = strip_tags($body);
+                $mail->send();
+                $message = "Succussfully send";
+                echo "<script>alert('$message');window.location.href='course.php';</script>", $mail->ErrorInfo;
+            } catch (Exception $e) {
+                $message = "Fail to send";
+                echo "<script>alert('$message');window.location.href='course.php';</script>", $mail->ErrorInfo;
+            }
         }
     }
 ?>
