@@ -5,14 +5,13 @@ $(document).ready(function(){
 	var m = date.getMonth();
 	var y = date.getFullYear();
 	var event_single;
-var y = {"title":"ttt13","start":new Date("2019-05-13 06:00:00"),"end":new Date("2019-05-16 18:00:00"),allDay: false}; 
+ 
 	var events_r = [ ];
 	events_r.push(y);
 			
 		$.ajax({
             async:false,
-            url:"../php/calendar.php",
-            data:{type:0},     //type
+            url:"../php/calendar.php",    //type
             type:"POST",
             dataType:"JSON",
             success: function(data){

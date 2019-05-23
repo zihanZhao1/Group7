@@ -12,7 +12,6 @@ function getDateForSpecificDayBetweenDates($startDate,$endDate,$day_number){
 }
 
 if (isset($_POST["operate"]) && $_POST["operate"] == "addCourse") {
-    $cid = $_POST["nameID"];
     $name = $_POST["name"];
     $fid = $_POST["fid"];
     $sdate = $_POST["sdate"];
@@ -20,33 +19,32 @@ if (isset($_POST["operate"]) && $_POST["operate"] == "addCourse") {
     $stime = $_POST["stime"];
     $etime = $_POST["etime"];
     $week = $_POST["week"];
-    $query="insert into sei_course(name,F_ID,start_date,end_date,start_time,end_time,week) values('$name','$fid','$sdate','$edate','$stime','$etime','$week')";
+    $query="insert into sei_course(C_ID,name,F_ID,start_date,end_date,start_time,end_time,week) values(default,'$name','$fid','$sdate','$edate','$stime','$etime','$week')";
     $statement = $pdo->prepare($query);
     $statement->execute();
-
+	$cid = $pdo->lastInsertId();
     $arr = getDateForSpecificDayBetweenDates($sdate,$edate,$week);
 
     foreach($arr as $key => $value){
         $start_datetime = $arr[$key]." ".$_POST["stime"].":00";
         $end_datetime = $arr[$key]." ".$_POST["etime"].":00";
-
         $fname = $pdo->query("select name from sei_facility where F_ID = '$fid' ")->fetch(PDO::FETCH_ASSOC);
         if($fname == 'Athletics Track'){
-            $query1="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','$fid','$cid','$start_datetime','$end_datetime ',20,'no')";
-            echo $query1;
+            $query1="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('8888','$fid','$cid','$start_datetime','$end_datetime ',20,'no')";
+			echo $query1;
             $statement1 = $pdo->prepare($query1);
             $statement1->execute();
         }else{
             $fnum = $pdo->query("select capability from sei_facility where F_ID = '$fid' ")->fetch(PDO::FETCH_ASSOC);
             $num = implode("",$fnum);
-            $query2="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','$fid','$cid','$start_datetime','$end_datetime','$num','yes')";
-            echo $query2;
+            $query2="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('8888','$fid','$cid','$start_datetime','$end_datetime','$num','yes')";
             $statement2 = $pdo->prepare($query2);
             $statement2->execute();
         }
     }
     echo 'Course inserted...';
 }
+
 
 if (isset($_POST["operate"]) && $_POST["operate"] == "showCourse") {
     $id = $_POST['nameID'];
@@ -82,13 +80,13 @@ if (isset($_POST["operate"]) && $_POST["operate"] == "editCourse") {
                 $end_datetime = $arr[$key]." ".$_POST["etime"].":00";
                 $fname = $pdo->query("select name from sei_facility where F_ID = '$fid' ")->fetch(PDO::FETCH_ASSOC);
                 if($fname == 'Athletics Track'){
-                    $query2 = "insert into sei_booking (U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','$fid', '$cid','$start_datetime','$end_datetime','20','no')";
+                    $query2 = "insert into sei_booking (U_ID,F_ID,C_ID,start,end,count,Avb) values('8888','$fid', ' $C_ID','$start_datetime','$end_datetime','20','no')";
                     $statement2 = $pdo->prepare($query2);
                     $statement2->execute();
                 }else{
                     $fnum = $pdo->query("select capability from sei_facility where F_ID = '$fid' ")->fetch(PDO::FETCH_ASSOC);
                     $num = implode("",$fnum);
-                    $query3 = "insert into sei_booking (U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','$fid', '$cid','$start_datetime','$end_datetime','$num','yes')";
+                    $query3 = "insert into sei_booking (U_ID,F_ID,C_ID,start,end,count,Avb) values('8888','$fid', ' $C_ID','$start_datetime','$end_datetime','$num','yes')";
                     $statement3 = $pdo->prepare($query3);
                     $statement3->execute();
                 }
@@ -114,3 +112,4 @@ if (isset($_POST['delete_mul'])) {
     }
 }
 ?>
+			

@@ -5,18 +5,7 @@ $type = $_POST["type"];
 	session_start();
 	$role = $_SESSION["role"];
 	$email = $_SESSION["userName"];
-	if ($role == "admin") {
-		
-}else{
-  ?>
-   <script>
 
-    alert('You are not admin！');
-
-	window.location.href="../../user/php/index.php";
-   </script>
-<?php
-}
 switch($type)
 {
     

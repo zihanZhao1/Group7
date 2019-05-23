@@ -1,6 +1,6 @@
 <?php
 $db_host = 'mysql:host=localhost';
-$db_name = 'dbname=test';
+$db_name = 'dbname=XSEI';
 $db_user = 'root';
 $db_pass = '';
 try{

@@ -1,6 +1,13 @@
 <?php
 include("database.php");
-$type = $_POST["type"];
+session_start();
+if(isset($_SESSION['type'])){
+	$type = $_SESSION['type'];
+}
+else{
+	$type = 0;
+}
+
 //
 switch($type)
 {

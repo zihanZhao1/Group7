@@ -19,53 +19,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>calendar</title>
+    <meta charset="UTF-8">
+    <title>Our Facilities - Durham University</title>
+    <link rel="stylesheet" href="../css/fullcalendar_c.css">
+    <link rel="stylesheet" href="../css/fullcalendar.print_c.css" media='print'>
+    <link rel="stylesheet" href="../css/index_c.css" type="text/css">
+    <link rel="stylesheet" href="../css/style_c.css">
+    <script src="../js/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<style type="text/css">
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;}
-body{font:12px/180% Arial, Helvetica, sans-serif, "";}
-.container{width:940px;margin:0 auto;}
-</style>
-
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/fullcalendar.css">
-<link rel="stylesheet" href="../css/fullcalendar.print.css" media='print'>
-
-
-<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="../js/fullcalendar.min.js"></script>
-<script type="text/javascript" src="../js/script_ALL.js"></script>
-<script type="text/javascript"> 
-<!-- 
-function F_jumpMenu(targ,selObj,restore){ //v3.0 
-eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'"); 
-if (restore) selObj.selectedIndex=0; 
-} 
-//--> 
-</script>
 
 </head>
 <body>
 
 
-<div class="container" style="width: auto; height: auto">
+<div class="container-fluid" >
+<?php
+require_once('head_c.php');
+?>
 	<div class="content">
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="box">
 					<div class="box-head">
-				<h3><li><a href="facility.php">Back</a></li></h3>				
+				<h3>Calendar</h3>				
 					</div>
-					<form action="" method="get"> 
+					<form action="manageCalendar.php" method="post"> 
 					<label> </label> 
-					<select name="jumpMenu" id="jumpMenu"
-					 onchange="F_jumpMenu('parent',this,0)"> 
-					 <option value="demo.php">ALL</option> 
-					<option value="Squash_Courts.php">Squash courts</option> 
-					<option value="Aerobics_Room.php">Aerobics room</option> 
-					<option value="Tennis.php">Tennis</option> 
-					<option value="Athletics_Track.php">Athletics track</option> 
+					<select name="jumpMenu" id="jumpMenu"> 
+					
+					 <option value="0">ALL</option> 
+					<option value="1">Squash courts</option> 
+					<option value="2">Aerobics room</option> 
+					<option value="3">Tennis</option> 
+					<option value="4">Athletics track</option> 
 					</select> 
+					<input type="submit" value="Search!" />
 					</form> 
 					<!-- <div id="" > <br/>  </div> -->
 					<!--canlendar-->
@@ -78,7 +78,8 @@ if (restore) selObj.selectedIndex=0;
 	</div>	
 </div>
 
-
-
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="../js/script_ALL.js"></script>
 </body>
 </html>

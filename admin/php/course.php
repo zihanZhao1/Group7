@@ -95,7 +95,7 @@
                             <?php
                             $result = $pdo->query("select F_ID, name from sei_facility");
 
-                            echo " <select name='f' id='f' style='margin-left: 20px;'>";
+                            echo " <select name='fid' id='fid' style='margin-left: 20px;'>";
 
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 unset($fid, $fname,$rn);
