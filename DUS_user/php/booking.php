@@ -15,11 +15,11 @@ include("conn.php");
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                crossorigin="anonymous"></script>
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                crossorigin="anonymous"></script>
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
@@ -97,7 +97,7 @@ include("conn.php");
 
                 <form class="date_form">
                     <h4>Date: </h4>
-                    <input type="date" name="date" id="date"><br>
+                    <input type="date" name="date" id="date" min="<?=date('Y-m-d', strtotime('+1 days'))?>" max="<?=date('Y-m-d', strtotime('+14 days')) ?>"><br>
                     <input class="btn btn-primary" type="submit" value="View Valid Time" name="date">
                 </form>
 
@@ -121,14 +121,13 @@ include("conn.php");
                                     <form class="booking_form">
                                         <select name="id">
                                             <?php
-                                            $Farray = array('0'=>'View All','1123'=>'Squash Courts','1124'=>'Aerobics Room','1125'=>'Tennis','1126'=>'Athletics Track');
+                                            $Farray = array('0' => 'View All', '1123' => 'Squash Courts', '1124' => 'Aerobics Room', '1125' => 'Tennis', '1126' => 'Athletics Track');
                                             $tmpId = array_keys($Farray);
-                                            foreach ($tmpId as $t){
+                                            foreach ($tmpId as $t) {
                                                 $tmpName = $Farray[$t];
-                                                if($t==$Fid){
+                                                if ($t == $Fid) {
                                                     echo "<option value='$t' selected='selected'>$tmpName</option>";
-                                                }
-                                                else
+                                                } else
                                                     echo "<option value='$t'>$tmpName</option>";
                                             }
                                             ?>
@@ -179,34 +178,34 @@ include("conn.php");
 </div>
 <?php require_once 'foot.php' ?>
 <script>
-    $(document).ready(function(){
-        $('#d').on('submit',function(event){
+    $(document).ready(function () {
+        $('#d').on('submit', function (event) {
             event.preventDefault();
             var error_d = '';
 
-            if($('#date').val()==''){
+            if ($('#date').val() == '') {
                 error_d = 'Date is required';
                 $('#error_d').text(error_d);
-                $('#date').css('border-color','#cc0000');
-            }else{
+                $('#date').css('border-color', '#cc0000');
+            } else {
                 error_d = '';
                 $('#error_d').text(error_d);
-                $('#date').css('border-color','');
+                $('#date').css('border-color', '');
             }
         });
 
-        $('#f').on('submit',function(event){
+        $('#f').on('submit', function (event) {
             event.preventDefault();
             var error_n = '';
 
-            if($('#num').val()==''){
+            if ($('#num').val() == '') {
                 error_n = 'Number of players is required';
                 $('#error_n').text(error_n);
-                $('#num').css('border-color','#cc0000');
-            }else{
+                $('#num').css('border-color', '#cc0000');
+            } else {
                 error_n = '';
                 $('#error_n').text(error_n);
-                $('#num').css('border-color','');
+                $('#num').css('border-color', '');
             }
         });
     });

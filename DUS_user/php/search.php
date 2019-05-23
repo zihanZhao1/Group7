@@ -36,7 +36,7 @@ if(count($_POST)>0){
         sqltodataEvent($sql);
     }
     if ($column == "name"){
-        $sql="SELECT C_ID,name,weeks,`time`,start FROM sei_course WHERE UPPER ($column) LIKE UPPER('%$search%')";
+        $sql="SELECT C_ID,name,F_ID,start_date,end_date,start_time,end_time,week FROM sei_course WHERE UPPER ($column) LIKE UPPER('%$search%')";
         sqltodataCourse($sql);
     }
     if ($column == "name"){
@@ -44,18 +44,18 @@ if(count($_POST)>0){
         sqltodataFacility($sql);
     }
     if ($column == "content"||$column=="title"){
-        $sql="SELECT N_ID,title,times,content FROM sei_news WHERE UPPER ($column) LIKE UPPER('%$search%')";
+        $sql="SELECT N_ID,title,time,content FROM sei_news WHERE UPPER ($column) LIKE UPPER('%$search%')";
         sqltodataContent($sql);
     }
 
 if ($column == "overall"){
     $sql="SELECT E_ID,title,start,`end` FROM sei_event WHERE UPPER (title) LIKE UPPER ('%$search%')";
     sqltodataEvent($sql);
-    $sql="SELECT C_ID,name,weeks,`time`,start FROM sei_course WHERE UPPER (name) LIKE UPPER ('%$search%')";
+    $sql="SELECT C_ID,name,F_ID,start_date,end_date,start_time,end_time,week FROM sei_course WHERE UPPER (name) LIKE UPPER ('%$search%')";
     sqltodataCourse($sql);
     $sql="SELECT F_ID,name,capability,open,close,price,img,info FROM sei_facility WHERE  UPPER (name) LIKE UPPER ('%$search%')";
     sqltodataFacility($sql);
-    $sql="SELECT N_ID,title,times,content FROM sei_news WHERE  UPPER(content) LIKE  UPPER('%$search%') OR UPPER (title) LIKE UPPER ('%$search%')";
+    $sql="SELECT N_ID,title,time,content FROM sei_news WHERE  UPPER(content) LIKE  UPPER('%$search%') OR UPPER (title) LIKE UPPER ('%$search%')";
     sqltodataContent($sql);
 }
 }

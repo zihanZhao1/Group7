@@ -20,6 +20,9 @@ for ($i = 0; $i < count($_POST['bookTime']); $i++) {
 }
 asort($book);
 
+$b = $_POST['bookTime'];
+$btime= implode(',',$b);
+
 $start = array();
 array_push($start, $book[0]);
 for ($i = 1; $i < count($book); $i++) {
@@ -62,7 +65,7 @@ if ($insert) {
     $row4 = $pdo->query("select name from sei_facility where F_ID = $Fid")->fetch(PDO::FETCH_ASSOC);
     $fname = $row4['name'];
 
-    require 'phpmailer/vendor/autoload.php';
+    require '../phpmailer/vendor/autoload.php';
 
     $mail = new PHPMailer(true);
     try {
@@ -94,8 +97,7 @@ if ($insert) {
                 <p>Student ID:' . $uid . '</p>
                 <p>Activity loaction:' . $fname . '</p>
                 <p>Date:' . $date . '</p>
-                <p>Start Time:' . $stime . '</p>
-                <p>End Time:' . $etime . '</p>
+                <p>Booked Time:' . $btime . '</p>
                 <p>Total Price:' . $price . '</p>
                 </body>
                 </html>';
