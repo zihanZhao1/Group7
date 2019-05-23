@@ -72,7 +72,7 @@
     $num_rows=$query->rowCount();
     if($num_rows>0){
       echo "<table class='table'>";
-      echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Weeks</th><th>Times</th><th>Start Times</th></tr><thead>";
+      echo "<thead class='thead-dark'><tr><th>ID</th><th>Name</th><th>Facility ID</th><th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Week</th></tr><thead>";
 
 
       $stmt=$pdo->prepare($sql);
