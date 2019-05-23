@@ -29,7 +29,7 @@ include("head.php"); ?>
                     echo $_SESSION["name"];
                 } ?></p>
             <ul>
-                <li class='navcurrent'><a href="#"> List of Courses</a></li>
+                <li class='navcurrent'>List of Courses</li>
             </ul>
         </div>
 

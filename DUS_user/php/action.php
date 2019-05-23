@@ -30,13 +30,13 @@
 
                     $fname = $pdo->query("select name from sei_facility where F_ID = '".$_POST["f"]."' ")->fetch(PDO::FETCH_ASSOC);
                     if($fname == 'Athletics Track'){
-                        $query1="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','".$_POST["f"]."','".$_POST["cid"]."','$start_datetime','$end_datetime ',20,'Yes')";
+                        $query1="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','".$_POST["f"]."','".$_POST["cid"]."','$start_datetime','$end_datetime ',20,'yes')";
                         $statement1 = $pdo->prepare($query1);
                         $statement1->execute();
                     }else{
                         $fnum = $pdo->query("select capability from sei_facility where F_ID = '".$_POST["f"]."' ")->fetch(PDO::FETCH_ASSOC);
                         $num = implode("",$fnum);
-                        $query2="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','".$_POST["f"]."','".$_POST["cid"]."','$start_datetime','$end_datetime','$num','Yes')";
+                        $query2="insert into sei_booking(U_ID,F_ID,C_ID,start,end,count,Avb) values('".$_SESSION["userId"]."','".$_POST["f"]."','".$_POST["cid"]."','$start_datetime','$end_datetime','$num','yes')";
                         $statement2 = $pdo->prepare($query2);
                         $statement2->execute();
                     }
